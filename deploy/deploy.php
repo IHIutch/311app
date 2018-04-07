@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Simple PHP Git deploy script
  *
  * Automatically deploy the code using PHP and Git.
