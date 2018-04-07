@@ -1,7 +1,6 @@
 <?php
 /**
  * Deployment configuration
- *
  * It's preferable to configure the script using this file instead of directly.
  *
  * Rename this file to `deploy-config.php` and edit the
