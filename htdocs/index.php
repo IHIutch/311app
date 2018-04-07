@@ -7,7 +7,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-4 max-height">
-			<h1>Submit an Issue - </h1>
+			<h1>Submit an Issue 1</h1>
 			<form>
 				<div class="form-group">
 					<div class="col-12">
