@@ -18,7 +18,7 @@
  *
  * @var string
  */
-define('SECRET_ACCESS_TOKEN', 'BetterChangeMeNowOrSufferTheConsequences');
+define('SECRET_ACCESS_TOKEN', 'X]Yqc*tv6p=uA4@T');
 /**
  * The address of the remote Git repository that contains the code that's being
  * deployed.
@@ -26,7 +26,7 @@ define('SECRET_ACCESS_TOKEN', 'BetterChangeMeNowOrSufferTheConsequences');
  *
  * @var string
  */
-define('REMOTE_REPOSITORY', 'https://github.com/markomarkovic/simple-php-git-deploy.git');
+define('REMOTE_REPOSITORY', 'https://github.com/IHIutch/311app');
 /**
  * The branch that's being deployed.
  * Must be present in the remote repository.
