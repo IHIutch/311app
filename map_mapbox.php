@@ -1,5 +1,4 @@
 <?php include "mapbox2db.php"; ?>
-    <div id="map"></div>
 
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiamJodXRjaCIsImEiOiJjamRqZGU1eTYxMTZlMzNvMjV2dGxzdG8wIn0.IAAk5wKeLXOUaQ4QYF3sEA';
