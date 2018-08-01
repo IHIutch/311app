@@ -1,4 +1,4 @@
-<?php include "db.php"; ?>
+<?php include "../lib/db.php"; ?>
 <?php
 
 function showAllData(){

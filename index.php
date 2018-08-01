@@ -1,4 +1,4 @@
-<?php include "db.php";?>
+<?php include "../lib/db.php";?>
 <?php include "functions.php";?>
 
 <?php createRows();?>
@@ -11,7 +11,7 @@
 			<form>
 				<div class="form-group">
 					<div class="col-12">
-						<label>What is th type?</label>
+						<label>What is the type?</label>
 						<select>
 							<option>This</option>
 							<option>That</option>
