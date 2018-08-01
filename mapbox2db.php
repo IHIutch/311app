@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 function rand_color() {
     return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
 };
@@ -6,7 +10,7 @@ function rand_color() {
 
 function markers(){
     // Opens a connection to a MySQL server
-    include "db.php";
+    include "lib/db.php";
 
     // Select all the rows in the markers table
     $query = "SELECT * FROM markers";
@@ -29,11 +33,11 @@ function markers(){
             $marker = array(
                 'type' => 'Feature',
                 'properties' => array(
-                    'stop_id' => $row['stop_id'],
+//                    'stop_id' => $row['stop_id'],
                     'name' => $row['name'],
                     'address' => $row['address'],
                     'type' => $row['type'],
-                    'specific_type' => $row['specific_type']
+//                    'specific_type' => $row['specific_type']
                 ),
                 'geometry' => array(
                     'type' => 'Point',
@@ -95,12 +99,15 @@ function markers(){
         )
     );
     
+//    $new_array = $allPoints[0];
     echo json_encode($allPoints, JSON_PRETTY_PRINT);
     
 };
 
 function test(){
     header("Content-type: application/json");
-    shapes();
+    markers();
 };
+//markers();
+//test();
 ?>

@@ -40,33 +40,8 @@
                 <div id='markers'></div>
             </div>
 
-            <div id="mapid"></div>
-
-            <script>
-                var mymap = L.map('mapid').setView([42.8864, -78.8784], 10);
-                var marker = L.marker([42.8864, -78.8784]).addTo(mymap);
-
-
-                L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}', {
-                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                    maxZoom: 18,
-                    id: 'mapbox.streets',
-                    accessToken: 'pk.eyJ1IjoiamJodXRjaCIsImEiOiJjamRqZGU1eTYxMTZlMzNvMjV2dGxzdG8wIn0.IAAk5wKeLXOUaQ4QYF3sEA'
-                }).addTo(mymap);
-
-
-                var popup = L.popup();
-
-                function onMapClick(e) {
-                    popup
-                        .setLatLng(e.latlng)
-                        .setContent("You clicked the map at " + e.latlng.toString())
-                        .openOn(mymap);
-                }
-
-                mymap.on('click', onMapClick);
-
-            </script>
+            <div id="map"></div>
+            <?php include "map_mapbox.php" ?>
 
         </div>
     </div>
