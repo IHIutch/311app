@@ -1,6 +1,3 @@
-<?php include "../lib/db.php";?>
-<?php include "functions.php";?>
-
 <?php include "inc/header.php"?>
 
 <div class="container-fluid">
@@ -8,20 +5,24 @@
         <div class="col-4 max-height">
             <div class="pt-4 px-3">
                 <h1>Submit an Issue</h1>
-                <form>
+                <form action="thank-you.php" method="post">
                     <div class="row">
                         <div class="form-group col-12">
                             <label>What is the type?</label>
-                            <select class="form-control">
-							<option>This</option>
-							<option>That</option>
+                            <select class="form-control" name="type">
+							<option value="Streets & Sidewalks">Streets &amp; Sidewalks</option>
 						</select>
                         </div>
                         <div class="form-group col-12">
-                            <label>More specific issue</label>
-                            <select class="form-control">
-							<option>Spec this</option>
-							<option>Spec that</option>
+                            <label>What is the subtype?</label>
+                            <select class="form-control" name="subtype">
+							<option value="Request for Paving">Request for Paving</option>
+							<option value="Problem with a Traffic Sign">Problem with a Traffic Sign</option>
+							<option value="Request a Crosswalk">Request a Crosswalk</option>
+							<option value="Report a Pothole">Report a Pothole</option>
+							<option value="Request a Bike Rack">Request a Bike Rack</option>
+							<option value="Report Faded Street Lines">Report Faded Street Lines</option>
+							<option value="Inspect or Repair a Sidewalk">Inspect or Repair a Sidewalk</option>							
 						</select>
                         </div>
                         <div class="form-group col-12">
@@ -29,99 +30,38 @@
                             <input type="text" name="address" class="form-control" placeholder="123 Main Street...">
                         </div>
                         <div class="form-group col-12">
-                            <button class="btn btn-primary">Use Current Location</button>
+                            <label>What is your email?</label>
+                            <input type="email" name="email" class="form-control" placeholder="johndoe@email.com">
+                        </div>
+                        <div class="form-group col-12">
+                            <label>Additional Comments</label>
+                            <textarea class="form-control" name="comments" rows="3" placeholder="Comments..."></textarea>
+                        </div>
+                        <div class="form-group col-12">
+                            <input class="btn btn-primary" type="submit" name="submit" value="Submit">
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-        <div class="col-8 max-height px-0">
-            <div class='map-overlay'>
-                <div id='markers'></div>
-            </div>
-
-            <div id="map"></div>
-            <?php include "map_mapbox.php" ?>
+        <div class="col-8">
+           
+            <?php $data = showTable(); 
+                foreach($data as $d){ ?>
+                <div class="row">
+                    <div class="col"><?php echo $d['id']?></div>
+                    <div class="col"><?php echo $d['submission_date']?></div>
+                    <div class="col"><?php echo $d['lat']?></div>
+                    <div class="col"><?php echo $d['lng']?></div>
+                    <div class="col"><?php echo $d['email']?></div>
+                    <div class="col"><?php echo $d['type']?></div>
+                    <div class="col"><?php echo $d['subtype']?></div>
+                    <div class="col"><a href="/report.php?report_id=<?php echo $d['id']?>">Link</a></div>
+                </div>
+                <?php } ?>
 
         </div>
     </div>
 </div>
 
 <? include "inc/footer.php"?>
-
-
-
-    <!--
- <div cf-context>
-				<form cf-form action="index.php" method="post">
-					<div class="form-group">
-						<input type="text" name="name" class="form-control" cf-questions="What is your name?||Please tell me your name.">
-					</div>
-					<div class="form-group">
-						<input type="text" name="address" class="form-control" cf-questions="What is your address?">
-					</div>
-					<div class="form-group">
-						<div class="radio">
-							<label>
-							<input cf-questions="What is the type?" type="radio" name="type" value="bar" tabindex="-1">
-							Snow
-						</label>
-						</div>
-						<div class="radio">
-							<label>
-							<input type="radio" name="type" value="restaurant" tabindex="-1">
-							Animal
-						</label>
-						</div>
-						<div class="radio">
-							<label>
-							<input cf-questions="What is the type?" type="radio" name="type" value="bar" tabindex="-1">
-							Forestry
-						</label>
-						</div>
-						<div class="radio">
-							<label>
-							<input type="radio" name="type" value="restaurant" tabindex="-1">
-							Sanitation
-						</label>
-						</div>
-						<div class="radio">
-							<label>
-							<input cf-questions="What is the type?" type="radio" name="type" value="bar" tabindex="-1">
-							Housing
-						</label>
-						</div>
-						<div class="radio">
-							<label>
-							<input type="radio" name="type" value="restaurant" tabindex="-1">
-							Parking
-						</label>
-						</div>
-						<div class="radio">
-							<label>
-							<input cf-questions="What is the type?" type="radio" name="type" value="bar" tabindex="-1">
-							Police
-						</label>
-						</div>
-						<div class="radio">
-							<label>
-							<input type="radio" name="type" value="restaurant" tabindex="-1">
-							Streets/Sidewalks
-						</label>
-						</div>
-						<div class="radio">
-							<label>
-							<input type="radio" name="type" value="restaurant" tabindex="-1">
-							Utilities
-						</label>
-						</div>
-					</div>
-
-					<label for="thats-all">Are you ready to submit the form?</label>
-					<select cf-questions="Are you ready to submit the form?" name="submit" class="form-control" tabindex="-1">
-				        <option></option>
-				        <option tabindex="-1">Yes!</option>
-				    </select>
-					<input class="btn btn-primary" type="submit" name="submit" value="CREATE">
-				</form>
-			</div>

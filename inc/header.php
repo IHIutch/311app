@@ -17,6 +17,10 @@
 
 
     <link rel="stylesheet" href="style.css">
+    <?php require_once __DIR__."/../config.php"?>
+    
+    <?php include SITE_ROOT.'/lib/db.php'; ?>
+    <?php include SITE_ROOT."/functions.php"?>
 </head>
 
 <body>

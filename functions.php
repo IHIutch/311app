@@ -1,4 +1,3 @@
-<?php include "../lib/db.php"; ?>
 <?php
 
 function showAllData(){
@@ -44,22 +43,29 @@ function geocoder(){
 }
 
 function createRows(){
+    
+    date_default_timezone_set("America/New_York");
     global $connection;
+    
     if(isset($_POST['submit'])){
 
-        $name = $_POST['name'];
+        $email = $_POST['email'];
         $type = $_POST['type'];
+        $subtype = $_POST['subtype'];
+        $submission_date = date("Y-m-d H:i:s");
+        $comments = $_POST['comments'];
         
         $array = geocoder();
         $address = $array[0];
         $lng = $array[1];
         $lat = $array[2];
         
-        $name = mysqli_real_escape_string($connection, $name);
         $type = mysqli_real_escape_string($connection, $type);
+        $subtype = mysqli_real_escape_string($connection, $subtype);
+        $comments = mysqli_real_escape_string($connection, $comments);
         
-        $query = "INSERT INTO markers(name, address, lng, lat, type)";
-        $query .= " VALUES ('$name', '$address', '$lng', '$lat', '$type')"; 
+        $query = "INSERT INTO reports(submission_date, type, subtype, lat, lng, email, comments)";
+        $query .= " VALUES ('$submission_date', '$type', '$subtype', '$lat', '$lng', '$email', '$comments')"; 
 
         $result = mysqli_query($connection, $query);
 
@@ -71,74 +77,53 @@ function createRows(){
     }
 }
 
-function readRows(){
+function getIdFromURL(){
+    $id = $_GET["report_id"];
+    return $id;
+};
+
+function getInfo(){
+        
+    // Opens a connection to a MySQL server
     global $connection;
-    $query = "SELECT * FROM markers";
-    $result = mysqli_query($connection, $query);
+    $id = getIdFromURL();
     
-    if(!$result){
-        die('Query failed.' . mysqli_error($connection));
-    } 
-       while($row = mysqli_fetch_assoc($result)){
-           ?>
-           <pre>
-           <?php
-           print_r($row);
-           ?>
-           </pre>
-           <?php
-       }
-}
-
-function updateTable(){
-    if(isset($_POST['submit'])){
-        global $connection;
-
-        $name = $_POST['name'];
-        $address = $_POST['address'];
-        $lng = $_POST['lng'];
-        $lat = $_POST['lat'];
-        $type = $_POST['type'];
-        $id = $_POST['id'];
-
-        $query = "UPDATE map_locations SET ";
-        $query .= "name = '$name', ";
-        $query .= "address = '$address' ";
-        $query .= "lng = '$lng', ";
-        $query .= "lat = '$lat' ";
-        $query .= "type = '$type' ";
-        $query .= "WHERE id = $id ";
-
-        $result = mysqli_query($connection, $query);
-        if(!$result){
-           die("Query Failed" . mysqli_error($connection));
-        } else{
-            echo "Record Updated!";
-        }
+    // Select data from database
+    $query = "SELECT * FROM reports
+    WHERE id = ". $id ."";
+    
+    //Return error if connection fails
+    $result = mysqli_query($connection, $query);
+    if (!$result) {
+      die('Invalid query: ' . mysqli_error($connection));
     }
-}
 
+    // Puts Stop Data into an array
+    while ($row = mysqli_fetch_assoc($result)){       
+        $data = $row;
+    };
+    return $data;
+};
 
-function deleteRows(){
-    if(isset($_POST['submit'])){
-        global $connection;
-
-        $name = $_POST['name'];
-        $address = $_POST['address'];
-        $lng = $_POST['lng'];
-        $lat = $_POST['lat'];
-        $type = $_POST['type'];
-        $id = $_POST['id'];
-
-        $query = "DELETE FROM map_locations ";
-        $query .= "WHERE id = $id ";
-
-        $result = mysqli_query($connection, $query);
-        if(!$result){
-           die("Query Failed" . mysqli_error($connection));
-        } else{
-            echo "Record deleted!";
-        }
+function showTable(){
+        
+    // Opens a connection to a MySQL server
+    global $connection;
+    
+    // Select data from database
+    $query = "SELECT * FROM reports";
+    
+    //Return error if connection fails
+    $result = mysqli_query($connection, $query);
+    if (!$result) {
+      die('Invalid query: ' . mysqli_error($connection));
     }
-}
+
+    // Puts Stop Data into an array
+    while ($row = mysqli_fetch_assoc($result)){       
+        $data[] = $row;
+    };
+    return $data;
+};
+
 ?>
