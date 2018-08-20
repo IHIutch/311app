@@ -56,7 +56,7 @@
                     <div class="col"><?php echo $d['email']?></div>
                     <div class="col"><?php echo $d['type']?></div>
                     <div class="col"><?php echo $d['subtype']?></div>
-                    <div class="col"><a href="/report.php?report_id=<?php echo $d['id']?>">Link</a></div>
+                    <div class="col"><a href="report.php?report_id=<?php echo $d['id']?>">Link</a></div>
                 </div>
                 <?php } ?>
 
