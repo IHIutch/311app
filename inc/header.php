@@ -16,11 +16,14 @@
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css' rel='stylesheet' />
 
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <?php require_once __DIR__."/../config.php"?>
-    
-    <?php include SITE_ROOT.'/lib/db.php'; ?>
     <?php include SITE_ROOT."/functions.php"?>
 </head>
+
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
+    </nav>
 
 <body>

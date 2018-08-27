@@ -1,4 +1,5 @@
 <?php
+include __DIR__.'/lib/db.php';
 
 function showAllData(){
     global $connection;
@@ -125,5 +126,53 @@ function showTable(){
     };
     return $data;
 };
+
+function getPoints(){
+    
+    global $connection;
+    
+    $query = "SELECT lat, lng, type FROM reports";
+    
+    //Return error if connection fails
+    $result = mysqli_query($connection, $query);
+    if (!$result) {
+      die('Invalid query: ' . mysqli_error());
+    }
+    
+        // Puts Stop Data into an array
+    while ($row = mysqli_fetch_assoc($result)){
+        
+        $lnglat = array();
+        $lnglat = array($row['lng'], $row['lat']);
+        
+        $points[] = array(
+                'type' => 'Feature',
+                'properties' => array(
+                    'type' => $row['type']
+                ),
+                'geometry' => array(
+                    'type' => 'Point',
+                    'coordinates' => $lnglat
+                )
+            );
+    };
+        
+        $array = array(    
+            'type'=> 'FeatureCollection',
+            'features' => $points,
+        );
+    
+    return $array;
+};
+
+function test(){
+    header('Content-Type: application/json');
+    $a = getPoints();
+    
+    echo json_encode($a, JSON_PRETTY_PRINT);
+};
+
+//test();
+
 
 ?>

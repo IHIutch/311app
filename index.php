@@ -45,21 +45,35 @@
             </div>
         </div>
         <div class="col-8">
-           
-            <?php $data = showTable(); 
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Submit Date</th>
+                        <th scope="col">Lat</th>
+                        <th scope="col">Lng</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Subtype</th>
+                        <th scope="col">Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <?php $data = showTable(); 
                 foreach($data as $d){ ?>
-                <div class="row">
-                    <div class="col"><?php echo $d['id']?></div>
-                    <div class="col"><?php echo $d['submission_date']?></div>
-                    <div class="col"><?php echo $d['lat']?></div>
-                    <div class="col"><?php echo $d['lng']?></div>
-                    <div class="col"><?php echo $d['email']?></div>
-                    <div class="col"><?php echo $d['type']?></div>
-                    <div class="col"><?php echo $d['subtype']?></div>
-                    <div class="col"><a href="report.php?report_id=<?php echo $d['id']?>">Link</a></div>
-                </div>
-                <?php } ?>
-
+                    <tr>
+                        <th scope="row"><?php echo $d['id']?></th>
+                        <td><?php echo $d['submission_date']?></td>
+                        <td><?php echo $d['lat']?></td>
+                        <td><?php echo $d['lng']?></td>
+                        <td><?php echo $d['email']?></td>
+                        <td><?php echo $d['type']?></td>
+                        <td><?php echo $d['subtype']?></td>
+                        <td><a href="report.php?report_id=<?php echo $d['id']?>">Link</a></td>
+                    </tr>
+                     <?php } ?>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
