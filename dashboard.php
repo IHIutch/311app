@@ -58,6 +58,7 @@
                     </div>
                 </div>
             </div>
+            test
             <div class="row">
                 <div class="col-12">
                     <div class="card shadow-sm">
@@ -131,23 +132,12 @@
     var points = <?php echo json_encode($points['features']); ?>;
 
     var pointStyle = {
-        radius: 8,
+        radius: 4,
         color: "#ff0000",
         weight: 0,
         opacity: 1,
         fillOpacity: 1
     };
-
-    //    function getColor(f) {
-    //        switch (f.properties.type) {
-    //            case 'Streets & Sidewalks':
-    //                return 'green';
-    //            case 'Request a Bike Rack':
-    //                return 'purple';
-    //            default:
-    //                return 'white';
-    //        }
-    //    }
 
     function style(feature) {
         switch (feature.properties.type) {

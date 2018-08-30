@@ -136,7 +136,7 @@ function getPoints(){
     //Return error if connection fails
     $result = mysqli_query($connection, $query);
     if (!$result) {
-      die('Invalid query: ' . mysqli_error());
+      die('Invalid query: ' . mysqli_error($connection));
     }
     
         // Puts Stop Data into an array
@@ -165,9 +165,47 @@ function getPoints(){
     return $array;
 };
 
+function getCurrentData(){
+    
+    global $connection;
+    
+    $query = "SELECT latitude, longitude, reason FROM current";
+    
+    //Return error if connection fails
+    $result = mysqli_query($connection, $query);
+    if (!$result) {
+      die('Invalid query: ' . mysqli_error($connection));
+    }
+    
+        // Puts Stop Data into an array
+    while ($row = mysqli_fetch_assoc($result)){
+        
+        $lnglat = array();
+        $lnglat = array($row['longitude'], $row['latitude']);
+        
+        $points[] = array(
+                'type' => 'Feature',
+                'properties' => array(
+                    'type' => $row['reason']
+                ),
+                'geometry' => array(
+                    'type' => 'Point',
+                    'coordinates' => $lnglat
+                )
+            );
+    };
+        
+        $array = array(    
+            'type'=> 'FeatureCollection',
+            'features' => $points,
+        );
+    
+    return $array;
+};
+
 function test(){
     header('Content-Type: application/json');
-    $a = getPoints();
+    $a = getCurrentData();
     
     echo json_encode($a, JSON_PRETTY_PRINT);
 };
