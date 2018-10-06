@@ -2,9 +2,13 @@
 
 <div class="container mt-5">
     <div class="row">
-        <div class="col-12">
-            <?php $info = getInfo();
-            print_r ($info);?>
+        <div class="col-12 mt-3">
+            <?php $info = getInfo();?>
+            <?php
+                foreach ($info as $k => $v){
+                    echo "<p><strong>$k</strong>: $v</p>";
+                }
+            ?>
         </div>
     </div>
 </div>
