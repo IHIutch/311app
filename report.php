@@ -1,8 +1,12 @@
 <?php include "inc/header.php"?>
 
-<?php $info = getInfo();
-header('Content-Type: application/json');
-echo json_encode($info, JSON_PRETTY_PRINT);?>
-
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <?php $info = getInfo();
+            print_r ($info);?>
+        </div>
+    </div>
+</div>
 
 <? include "inc/footer.php"?>

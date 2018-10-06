@@ -112,7 +112,7 @@ function showTable(){
     global $connection;
     
     // Select data from database
-    $query = "SELECT * FROM reports";
+    $query = "SELECT * FROM reports ORDER BY id DESC";
     
     //Return error if connection fails
     $result = mysqli_query($connection, $query);

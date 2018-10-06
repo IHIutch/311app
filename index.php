@@ -1,5 +1,5 @@
 <?php include "inc/header.php"?>
-<div class="container-fluid">
+<div class="container-fluid mt-5">
     <div class="row">
         <div class="col-4 max-height">
             <div class="pt-4 px-3">
@@ -21,7 +21,7 @@
 							<option value="Report a Pothole">Report a Pothole</option>
 							<option value="Request a Bike Rack">Request a Bike Rack</option>
 							<option value="Report Faded Street Lines">Report Faded Street Lines</option>
-							<option value="Inspect or Repair a Sidewalk">Inspect or Repair a Sidewalk</option>							
+                            <option value="Inspect or Repair a Sidewalk">Inspect or Repair a Sidewalk</option>
 						</select>
                         </div>
                         <div class="form-group col-12">
