@@ -25,8 +25,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
     ?>
 
-    <?php require_once './config.php'?>
-    <?php include SITE_ROOT.'/functions.php'?>
+    <?php include __DIR__.'/functions.php'?>
 </head>
 
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
