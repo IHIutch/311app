@@ -21,11 +21,11 @@
 
     <?php 
     ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
     ?>
 
-    <?php include __DIR__.'/functions.php'?>
+    <?php include '../functions.php'?>
 </head>
 
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
