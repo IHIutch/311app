@@ -3,8 +3,7 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-12 mt-3">
-            <?php $info = getInfo();
-            $images = getImages();?>
+            <?php $info = getInfo();?>
 
             <?php
                 foreach ($info as $k => $v){
@@ -15,12 +14,14 @@
     </div>
     <div class="row">
         <?php 
+        if(getImages()){
+            $images = getImages();
             foreach($images as $key){
                 foreach($key as $k => $v){
                     echo '<div class="col-3"><img src="uploads/'.$v.'" class="w-100 img-thumbnail"></div>';
                 }
             };
-        ?>
+        }?>
     </div>
 </div>
 

@@ -122,11 +122,14 @@ function getImages(){
       die('Invalid query: ' . mysqli_error($connection));
     }
 
+    $data = array();
     // Puts Stop Data into an array
     while ($row = mysqli_fetch_assoc($result)){       
         $data[] = $row;
     };
-    return $data;
+    if($data){
+        return $data;
+    }
 };
 
 function showTable(){
