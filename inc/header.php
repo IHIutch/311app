@@ -42,11 +42,11 @@ error_reporting(E_ALL);
 
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
         <a class="navbar-brand mr-auto mr-lg-0" href="/">Buffalo 311</a>
-        <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+        <button class="navbar-toggler p-0 border-0" type="button" data-toggle="main-nav">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+        <div class="navbar-collapse offcanvas-collapse" id="main-nav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Create a Report</a>

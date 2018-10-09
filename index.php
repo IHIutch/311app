@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-8 offset-2">
+        <div class="col-12 col-md-8 offset-md-2">
             <div class="p-4 bg-white rounded shadow-sm mb-4">
                 <form action="thank-you.php" method="post" enctype="multipart/form-data">
                     <div class="row">
