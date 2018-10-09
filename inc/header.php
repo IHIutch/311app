@@ -47,7 +47,7 @@ error_reporting(E_ALL);
         </button>
 
         <div class="navbar-collapse offcanvas-collapse" id="main-nav">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Create a Report</a>
                 </li>
