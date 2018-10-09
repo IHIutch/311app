@@ -46,8 +46,8 @@ error_reporting(E_ALL);
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="navbar-collapse offcanvas-collapse" id="main-nav">
-            <ul class="navbar-nav mr-auto">
+        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Create a Report</a>
                 </li>
