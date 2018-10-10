@@ -24,9 +24,12 @@
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js" integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q==" crossorigin=""></script>
 
+    <link rel="stylesheet" type="text/css" href="plugins/DataTables/datatables.min.css" />
+    <script type="text/javascript" src="plugins/DataTables/datatables.min.js"></script>
 
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/offcanvas.css">
+    <link rel="stylesheet" href="css/style.css">
+
 
     <?php 
     ini_set('display_errors', 1);

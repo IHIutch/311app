@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="mb-3 col-12">
                     <div class="p-4 bg-white rounded shadow-sm">
-                        <table class="table table-striped table-sm mb-0">
+                        <table id="datatable" class="table table-striped table-sm mb-0">
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
@@ -100,6 +100,15 @@
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready( function () {
+    $('#datatable').DataTable({
+        select: true,
+        responsive: true
+    });
+} );
+</script>
 
 <script>
     var map = L.map('map').setView([42.8864, -78.8784], 12);
