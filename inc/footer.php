@@ -1,4 +1,4 @@
-<footer class="footer py-3 bg-grey">
+<footer class="footer py-3 bg-grey mt-5">
     <div class="container text-center">
         <span class="text-muted">Buffalo 311</span>
     </div>

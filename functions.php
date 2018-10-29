@@ -20,7 +20,9 @@ function showAllData(){
 
 function geocoder(){
     global $connection;
-    $address = $_POST['address'];
+    $add_number = $_POST['add_number'];
+    $add_street = $_POST['add_street'];
+    $address = $add_number . " " . $add_street;
     $address = mysqli_real_escape_string($connection, $address);
     $encodeAdd = urlencode($address);
 
@@ -40,7 +42,7 @@ function geocoder(){
 
     $lng = ($localObject->lng);
     $lat = ($localObject->lat);
-    return array($address, $lng, $lat);
+    return array($add_number, $add_street, $lng, $lat);
 }
 
 function createRows(){
@@ -56,17 +58,19 @@ function createRows(){
         $submission_date = date("Y-m-d H:i:s");
         $comments = $_POST['comments'];
         
-        $array = geocoder();
-        $address = $array[0];
-        $lng = $array[1];
-        $lat = $array[2];
+        $geo_array = geocoder();
+        $add_number = $geo_array[0];
+        $add_street = $geo_array[1];
+        $lng = $geo_array[2];
+        $lat = $geo_array[3];
+        $postal_code = $_POST['postal_code'];
         
         $type = mysqli_real_escape_string($connection, $type);
         $subtype = mysqli_real_escape_string($connection, $subtype);
         $comments = mysqli_real_escape_string($connection, $comments);
         
-        $query = "INSERT INTO reports(submission_date, type, subtype, lat, lng, email, comments)";
-        $query .= " VALUES ('$submission_date', '$type', '$subtype', '$lat', '$lng', '$email', '$comments')"; 
+        $query = "INSERT INTO reports(submission_date, type, subtype, lat, lng, email, comments, street_num, street_name, zip)";
+        $query .= " VALUES ('$submission_date', '$type', '$subtype', '$lat', '$lng', '$email', '$comments', '$add_number', '$add_street', '$postal_code')"; 
 
         $result = mysqli_query($connection, $query);
 
@@ -291,7 +295,24 @@ function getCurrentData(){
     return $array;
 };
 
-
+function getIssueTypes(){
+    global $connection;
+    
+    $query = "SELECT DISTINCT type FROM issue_types";
+    
+    //Return error if connection fails
+    $result = mysqli_query($connection, $query);
+    if (!$result) {
+      die('Invalid query: ' . mysqli_error($connection));
+    }
+    
+        // Puts Stop Data into an array
+    while ($row = mysqli_fetch_assoc($result)){
+        $array[] = $row['type'];
+    };
+    
+    return $array;
+}
 
 function test(){
     header('Content-Type: application/json');
