@@ -58,6 +58,8 @@ function createRows(){
         $submission_date = date("Y-m-d H:i:s");
         $comments = $_POST['comments'];
         
+        $subject = getSubject($type);
+        
         $geo_array = geocoder();
         $add_number = $geo_array[0];
         $add_street = $geo_array[1];
@@ -69,8 +71,8 @@ function createRows(){
         $subtype = mysqli_real_escape_string($connection, $subtype);
         $comments = mysqli_real_escape_string($connection, $comments);
         
-        $query = "INSERT INTO reports(submission_date, type, subtype, lat, lng, email, comments, street_num, street_name, zip)";
-        $query .= " VALUES ('$submission_date', '$type', '$subtype', '$lat', '$lng', '$email', '$comments', '$add_number', '$add_street', '$postal_code')"; 
+        $query = "INSERT INTO reports(submission_date, subject, type, subtype, lat, lng, email, comments, street_num, street_name, zip)";
+        $query .= " VALUES ('$submission_date', '$subject', '$type', '$subtype', '$lat', '$lng', '$email', '$comments', '$add_number', '$add_street', '$postal_code')"; 
 
         $result = mysqli_query($connection, $query);
 
@@ -161,7 +163,7 @@ function getPoints(){
     
     global $connection;
     
-    $query = "SELECT lat, lng, type FROM reports";
+    $query = "SELECT lat, lng, subject, type FROM reports";
     
     //Return error if connection fails
     $result = mysqli_query($connection, $query);
@@ -178,7 +180,8 @@ function getPoints(){
         $points[] = array(
             'type' => 'Feature',
             'properties' => array(
-                'type' => $row['type']
+                'type' => $row['type'],
+                'subject' => $row['subject']
             ),
             'geometry' => array(
                 'type' => 'Point',
@@ -312,6 +315,79 @@ function getIssueTypes(){
     };
     
     return $array;
+}
+
+
+function getSubject($type){
+    if ($type == 'Sanitation'
+        || $type == 'Engineering - Traffic'
+        || $type == 'Engineering - Street Repairs'
+        || $type == 'Streets/Sanitation'
+        || $type == 'Streets'
+        || $type == 'Rodent Control'
+        || $type == 'Personnel'
+        || $type == 'City Parks'
+        || $type == 'Forestry'
+        || $type == 'Buildings Division'
+        || $type == 'Animal Shelter'
+        || $type == 'Harbor Master'
+        || $type == 'Telecommunications'){
+        return "Dept of Public Works";
+    }
+    elseif ($type == 'Real Estate'
+           || $type == 'Administration'
+           || $type == 'OSP'){
+        return "Office of Strategic Planning";
+    }
+    elseif ($type == 'Citizen Services - Quick Response Teams'
+           || $type == 'Citizens Services - Clean City'
+           || $type == 'Citizen Services - Graffiti'
+           || $type == 'Citizen Services - Save Our Streets'){
+        return "Office of the Mayor";
+    }
+    elseif ($type == 'Housing'){
+        return "DPIS";
+    }
+    elseif ($type == 'National Grid'
+           || $type == 'Buffalo Sewer Authority'
+           || $type == 'Buffalo Water Authority'){
+        return "Utilities";
+    }
+    elseif ($type == 'HR'){
+        return "Human Resources";
+    }
+    elseif ($type == 'Freedom of Information'
+           || $type == 'Adjudication - Ordinance Violation'){
+        return "Dept of Law";
+    }
+    elseif ($type == 'Taxation'
+           || $type == 'Assessment & Taxation'){
+        return "Assessment & Taxation";
+    }
+    elseif ($type == 'BFD'){
+        return "Buffalo Fire Department";
+    }
+    elseif ($type == 'Community Based Orgs'
+           || $type == 'Youth Bureau'){
+        return "Community Services & Rec. Program";
+    }
+    elseif ($type == 'BMHA'){
+        return "Buffalo Municipal Housing Authority";
+    }
+    elseif ($type == 'Police'){
+        return "Buffalo Police Department";
+    }
+    elseif ($type == 'Parking Violations Bureau'
+           || $type == 'Moving Violations'){
+        return "Dept of Parking";
+    }
+    elseif ($type == 'City Clerk Issue'
+           || $type == 'Licenses'){
+        return "City Clerk";
+    }
+    else {
+        return "Miscellaneous";
+    }
 }
 
 function test(){

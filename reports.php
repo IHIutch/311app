@@ -132,19 +132,71 @@ $(document).ready( function () {
     };
 
     function style(feature) {
-        switch (feature.properties.type) {
-            case 'Streets & Sidewalks':
+        switch (feature.properties.subject) {
+            case 'Dept of Public Works':
                 return {
-                    color: '#00FF57'
+                    color: '#f3bc7d'
                 };
-            case 'Request a Bike Rack':
+            case 'Office of Strategic Planning':
                 return {
-                    color: '#FF5500'
+                    color: '#5a0082'
                 };
-            default:
+            case 'Office of the Mayor':
                 return {
-                    color: 'white'
+                    color: '#ef30a4'
                 };
+            case 'DPIS':
+                return {
+                    color: '#371b7a'
+                };
+            case 'Utilities':
+                return {
+                    color: '#b3ad00'
+                };
+            case 'Human Resources':
+                return {
+                    color: '#4ba2ff'
+                };
+            case 'Dept of Law':
+                return {
+                    color: '#c52b06'
+                };
+            case 'Assessment & Taxation':
+                return {
+                    color: '#2bdebe'
+                };
+            case 'Buffalo Fire Department':
+                return {
+                    color: '#c6001d'
+                };
+            case 'Community Services & Rec. Program':
+                return {
+                    color: '#6cdc8c'
+                };
+            case 'Buffalo Municipal Housing Authority':
+                return {
+                    color: '#7a0069'
+                };
+            case 'Buffalo Police Department':
+                return {
+                    color: '#019457'
+                };
+            case 'Dept of Parking':
+                return {
+                    color: '#ff3561'
+                };
+            case 'City Clerk':
+                return {
+                    color: '#019895'
+                };
+            case 'Miscellaneous':
+                return {
+                    color: '#629d00'
+                };
+        default:
+            return {
+                color: 'red'
+            };
         }
     };
 
