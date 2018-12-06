@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-   
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,53 +45,52 @@
 </head>
 
 <body class="bg-light">
-<?php if (isset($_SESSION['logged']) && $_SESSION['logged'] == true){ ?>
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-        <a class="navbar-brand mr-auto mr-lg-0" href="/">Buffalo 311</a>
-        <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="container">
+            <?php if (isset($_SESSION['logged']) && $_SESSION['logged'] == true){ ?>
+            <a class="navbar-brand mr-auto mr-lg-0" href="/">Buffalo 311</a>
+            <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Create a Report</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="reports.php">Reports</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="profile.php">Your Account</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="logout.php">Log Out</a>
-                </li>
-            </ul>
+            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Create a Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports.php">Reports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.php">Your Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+            <?php }else{ ?>
+            <a class="navbar-brand mr-auto mr-lg-0" href="/">Buffalo 311</a>
+            <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Create a Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports.php">Reports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="register.php">Register</a>
+                    </li>
+                </ul>
+            </div>
+            <?php } ?>
         </div>
     </nav>
-<?php }else{ ?>
-    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-        <a class="navbar-brand mr-auto mr-lg-0" href="/">Buffalo 311</a>
-        <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Create a Report</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="reports.php">Reports</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.php">Log In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="btn btn-primary" href="register.php">Register</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-<?php } ?>
-    

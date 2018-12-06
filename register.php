@@ -6,13 +6,13 @@ $newUser = doesUserExist();
 
 <div class="container">
     <div class="row">
-        <div class="col-6 offset-3 mt-5">
+        <div class="col-12 col-md-6 offset-md-3 mt-5">
             
             <?php if($newUser){
                     if(createNewUser()){ ?>
                 <div class="card p-4 mt-5">
                     <h1>Success</h1>
-                    <p>Your account was successfully created. Please <a href="index.php">click here to login</a>.</p>
+                    <p>Your account was successfully created. Please <a href="login.php">click here to login</a>.</p>
                 </div>
             <?php } else{ ?>
                 <div class="card p-4 mt-5">

@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-6 offset-3 mt-5">
+        <div class="col-12 col-md-6 offset-md-3 mt-5">
             <h1>Log In</h1>
             <p>Log in to your account to see the your submitted 311 requests.</p>
 
