@@ -59,7 +59,7 @@ error_reporting(E_ALL);
                     <a class="nav-link" href="reports.php">Reports</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Log In</a>
+                    <a class="nav-link" href="login.php">Log In</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Disabled</a>

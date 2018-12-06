@@ -1,4 +1,9 @@
 <?php include "inc/header.php"?>
+
+<script src="plugins/jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="plugins/jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
+<script src="plugins/jQuery-File-Upload/js/jquery.fileupload.js"></script>
+
 <!--
 <div class="nav-scroller bg-white shadow-sm">
     <nav class="nav nav-underline">
@@ -28,7 +33,7 @@
     <div class="row">
         <div class="col-12 col-md-8 offset-md-2">
             <div class="p-4 bg-white rounded shadow-sm mb-4">
-                <form action="thank-you.php" method="post" enctype="multipart/form-data">
+                <form action="thank-you.php" method="post" enctype="multipart/form-data" id="myForm">
                     <div class="row">
                         <div class="form-group col-12">
                             <label>What is the type?</label>
@@ -82,13 +87,12 @@
                         </div>
                         <div class="form-group col-12">
                             <label>Upload Image</label>
-                            <div class="custom-file">
-                                <input type="file" name="filesToUpload[]" class="custom-file-input" id="filesToUpload" multiple>
-                                <label class="custom-file-label" for="customFile">Choose file...</label>
+                            <!-- The file input field used as target for the file upload widget -->
+                            <div class="custom-file mb-3">
+                                <input type="file" name="filesToUpload[]" class="custom-file-input" id="image-upload" accept="image/*" multiple>
+                                 <label class="custom-file-label" for="customFile">Choose file(s)...</label> 
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-row" id="image-preview"></div>
+                            <div class="form-row mb-3" id="image-preview"></div>
                         </div>
                         <div class="form-group col-12">
                             <label>Additional Comments</label>
@@ -111,107 +115,193 @@
 
 </script>
 
+<!--
 <script>
-    function handleFileSelect(evt) {
-        var files = evt.target.files;
-        // Loop through the FileList and render image files as thumbnails.
-        for (var i = 0, f; f = files[i]; i++) {
-            // Only process image files.
-            if (!f.type.match('image.*')) {
-                continue;
+    var selDiv = "";
+    var storedFiles = [];
+
+    $("#image-upload").on("change", handleFileSelect);
+
+    selDiv = $("#image-preview");
+
+    $("body").on("click", ".clear", removeFile);
+    var myForm = document.getElementById('myForm');
+
+    function handleFileSelect(e) {
+        
+        var files = e.target.files;
+        var filesArr = Array.prototype.slice.call(files);
+        filesArr.forEach(function(f) {
+
+            if (!f.type.match("image.*")) {
+                return;
             }
+            storedFiles.push(f);
+
             var reader = new FileReader();
-            // Closure to capture the file information.
-            reader.onload = (function(theFile) {
-                return function(e) {
-                    // Render thumbnail.
-                    var div = document.createElement('div');
-                    div.setAttribute("class", "col-3");
-                    div.innerHTML = [
-                        '<img class="img-thumbnail" src="',
-                        e.target.result,
-                        '" title="', escape(theFile.name),
-                        '"/>'
-                    ].join('');
-                    document.getElementById('image-preview').insertBefore(div, null);
-                };
-            })(f);
-            // Read in the image file as a data URL.
+            reader.onload = function(e) {
+                var clearButton = '<div class="btn btn-secondary clear">Clear</div>';
+                var preview = "<div class='col-3'><img class='img-thumbnail' src=\"" + e.target.result + "\" data-file='" + f.name + "'>" + f.name + clearButton + "</div>";
+                selDiv.append(preview);
+            }
+            
             reader.readAsDataURL(f);
+        });
+    }
+    
+    function getInfo() {
+        alert($(this).prev().data("file"));
+    }
+
+    function removeFile(e) {
+
+        var file = $(this).prev().data("file");
+                
+        for (var i = 0; i < storedFiles.length; i++) {
+            if (storedFiles[i].name === file) {
+                storedFiles.splice(i, 1);
+                break;
+            }
+        }
+        $(this).parent().remove();
+        
+        var data = new FormData();
+        for(var i=0, len=storedFiles.length; i<len; i++) {
+			data.append('filesToUpload[]', storedFiles[i]);	
+		}
+        
+        console.log(data.getAll('filesToUpload[]'));
+    }
+
+
+	function handleForm(e) {
+		e.preventDefault();
+		var data = new FormData();
+		
+		for(var i=0, len=storedFiles.length; i<len; i++) {
+			data.append('filesToUpload[]', storedFiles[i]);	
+		}
+		
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST', 'thank-you.php', true);
+		
+		xhr.onload = function(e) {
+			if(this.status == 200) {
+				console.log(e.currentTarget.responseText);	
+				alert(e.currentTarget.responseText + ' items uploaded.');
+			}
+		}
+		
+		xhr.send(data);
+	}
+
+</script>
+-->
+
+<script>
+    function previewImages() {
+
+        var $preview = $('#image-preview').empty();
+        if (this.files) $.each(this.files, readAndPreview);
+
+        function readAndPreview(i, file) {
+
+            if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                return alert(file.name + " is not an image");
+            } // else...
+
+            var reader = new FileReader();
+
+            $(reader).on("load", function() {
+
+                //                $preview.append('<div id="test" class="col-3"></div>');
+                $preview.append($('<div/>', {
+                        class: 'col-3'
+                    })
+                    .append($('<img/>', {
+                        src: this.result,
+                        class: 'img-thumbnail'
+                    })));
+            });
+            reader.readAsDataURL(file);
         }
     }
-    document.getElementById('filesToUpload').addEventListener('change', handleFileSelect, false);
+
+    $('#image-upload').on("change", previewImages);
 
 </script>
 
 <script>
-      // This example displays an address form, using the autocomplete feature
-      // of the Google Places API to help users fill in the information.
+    // This example displays an address form, using the autocomplete feature
+    // of the Google Places API to help users fill in the information.
 
-      // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+    // This example requires the Places library. Include the libraries=places
+    // parameter when you first load the API. For example:
+    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-      var placeSearch, autocomplete;
-      var componentForm = {
+    var placeSearch, autocomplete;
+    var componentForm = {
         street_number: 'short_name',
         route: 'long_name',
         locality: 'long_name',
         administrative_area_level_1: 'short_name',
         country: 'long_name',
         postal_code: 'short_name'
-      };
+    };
 
-      function initAutocomplete() {
+    function initAutocomplete() {
         // Create the autocomplete object, restricting the search to geographical
         // location types.
         autocomplete = new google.maps.places.Autocomplete(
-            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
-            {types: ['geocode']});
+            /** @type {!HTMLInputElement} */
+            (document.getElementById('autocomplete')), {
+                types: ['geocode']
+            });
 
         // When the user selects an address from the dropdown, populate the address
         // fields in the form.
         autocomplete.addListener('place_changed', fillInAddress);
-      }
+    }
 
-      function fillInAddress() {
+    function fillInAddress() {
         // Get the place details from the autocomplete object.
         var place = autocomplete.getPlace();
 
         for (var component in componentForm) {
-          document.getElementById(component).value = '';
-          document.getElementById(component).disabled = false;
+            document.getElementById(component).value = '';
+            document.getElementById(component).disabled = false;
         }
 
         // Get each component of the address from the place details
         // and fill the corresponding field on the form.
         for (var i = 0; i < place.address_components.length; i++) {
-          var addressType = place.address_components[i].types[0];
-          if (componentForm[addressType]) {
-            var val = place.address_components[i][componentForm[addressType]];
-            document.getElementById(addressType).value = val;
-          }
+            var addressType = place.address_components[i].types[0];
+            if (componentForm[addressType]) {
+                var val = place.address_components[i][componentForm[addressType]];
+                document.getElementById(addressType).value = val;
+            }
         }
-      }
+    }
 
-      // Bias the autocomplete object to the user's geographical location,
-      // as supplied by the browser's 'navigator.geolocation' object.
-    
+    // Bias the autocomplete object to the user's geographical location,
+    // as supplied by the browser's 'navigator.geolocation' object.
+
     // Normally geolocate could be used to find the user's location, it has been edited to bias a 10km radius around the center of Buffalo as defined by Google Maps, 42.8864,-78.8783
-    
-      function geolocate() {
-            var geolocation = {
-              lat: 42.8864,
-              lng: -78.8783
-            };
-          // Radius is set in meters
-            var circle = new google.maps.Circle({
-              center: geolocation,
-              radius: 10000
-            });
-            autocomplete.setBounds(circle.getBounds());
-          };
-    </script>
+
+    function geolocate() {
+        var geolocation = {
+            lat: 42.8864,
+            lng: -78.8783
+        };
+        // Radius is set in meters
+        var circle = new google.maps.Circle({
+            center: geolocation,
+            radius: 10000
+        });
+        autocomplete.setBounds(circle.getBounds());
+    };
+
+</script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1hgyqHWtrkaolwztdX5G_nc2nFdFgyis&libraries=places&callback=initAutocomplete" async defer>
 </script>

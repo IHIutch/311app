@@ -400,4 +400,98 @@ function test(){
 //test();
 
 
+function login(){
+    
+    session_start();
+    global $connection;
+
+};
+
+function doesUserExist(){
+    
+    global $connection;
+    
+    if(isset($_POST['email']) && isset($_POST['password'])){
+        $email = mysqli_real_escape_string($connection, $_POST['email']);
+        $result = mysqli_query($connection, "SELECT * FROM users WHERE email = '$email'");
+
+        if(mysqli_num_rows($result) > 0){
+            return false;
+        }else{
+            return true;
+        } 
+    }else{
+        return null;
+    }
+}
+
+function createNewUser(){
+        
+    global $connection;
+    
+    $email = mysqli_real_escape_string($connection, $_POST['email']);
+    $password = mysqli_real_escape_string($connection, $_POST['password']);
+    
+    $password = password_hash($password, PASSWORD_DEFAULT);
+    
+    $query = "INSERT INTO users(email, password)";
+    $query .= "VALUES('$email', '$password')";
+
+    $result = mysqli_query($connection, $query);
+    
+    return $result;
+}
+
+function loginVerify(){
+    if(isset($_POST['submit'])){
+        global $connection;
+
+        $email = mysqli_real_escape_string($connection, $_POST['email']);
+        $password = mysqli_real_escape_string($connection, $_POST['password']);
+                
+        $result = mysqli_query($connection, "SELECT * FROM users WHERE email='$email'");
+
+        if(mysqli_num_rows($result) == 1){
+            $row = mysqli_fetch_array($result);
+            if(password_verify($password, $row['password'])){
+                session_start(); 
+                $_SESSION['email'] = $row['email'];  
+                $_SESSION['logged'] = TRUE; 
+                header("Location: profile.php"); // Modify to go to the page you would like 
+                exit; 
+            }else{ 
+                header("Location: login.php"); 
+                exit;
+            }
+        }else{ 
+            header("Location: login.php"); 
+            exit; 
+        } 
+    }else{    //If the form button wasn't submitted go to the index page, or login page 
+        header("Location: login.php");     
+        exit; 
+    }
+}
+
+function showUserData($email){
+            
+    // Opens a connection to a MySQL server
+    global $connection;
+    
+    // Select data from database
+    $query = "SELECT * FROM reports WHERE email = '$email' ORDER BY id DESC";
+    
+    //Return error if connection fails
+    $result = mysqli_query($connection, $query);
+    if (!$result) {
+      die('Invalid query: ' . mysqli_error($connection));
+    }
+
+    // Puts Stop Data into an array
+    while ($row = mysqli_fetch_assoc($result)){       
+        $data[] = $row;
+    };
+    return $data;
+}
+
 ?>
