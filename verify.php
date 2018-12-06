@@ -1,5 +1,5 @@
 <?php 
-session_start(); 
-
-include "inc/header.php";
-loginVerify(); ?>
+ob_start(); 
+include "functions.php";
+loginVerify(); 
+?>
