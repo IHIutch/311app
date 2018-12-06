@@ -1,7 +1,9 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+   
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,8 +43,6 @@
     <?php include_once './config.php'?>
     <?php include ROOT.'functions.php'?>
 </head>
-
-<?php session_start(); ?>
 
 <body class="bg-light">
 <?php if (isset($_SESSION['logged']) && $_SESSION['logged'] == true){ ?>
