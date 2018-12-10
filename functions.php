@@ -52,7 +52,12 @@ function createRows(){
     
     if(isset($_POST['submit'])){
 
-        $email = $_POST['email'];
+        if(!empty($_POST['email'])){
+            $email = $_POST['email'];
+        }else{
+            $email = 'anonymous';
+        };
+                
         $type = $_POST['type'];
         $subtype = $_POST['subtype'];
         $submission_date = date("Y-m-d H:i:s");
@@ -79,7 +84,9 @@ function createRows(){
         if(!$result){
             die('Query failed.' . mysqli_error($connection));
         } else{
-            echo "Record created!";
+            $last_id = mysqli_insert_id($connection);
+            header("Location: report.php?report_id=".$last_id); 
+            exit;
         }
     }
 }
@@ -174,7 +181,6 @@ function getPoints(){
         // Puts Stop Data into an array
     while ($row = mysqli_fetch_assoc($result)){
         
-        $lnglat = array();
         $lnglat = array($row['lng'], $row['lat']);
         
         $points[] = array(
@@ -193,6 +199,46 @@ function getPoints(){
     $array = array(    
         'type'=> 'FeatureCollection',
         'features' => $points,
+    );
+    
+    return $array;
+};
+
+function getSinglePoint(){
+    
+    $id = getIdFromURL();
+    
+    global $connection;
+    
+    $query = "SELECT lat, lng, subject, type FROM reports WHERE id = '$id'";
+    
+    //Return error if connection fails
+    $result = mysqli_query($connection, $query);
+    if (!$result) {
+      die('Invalid query: ' . mysqli_error($connection));
+    }
+    
+        // Puts Stop Data into an array
+    while ($row = mysqli_fetch_assoc($result)){
+        
+        $lnglat = array($row['lng'], $row['lat']);
+        
+        $point = array(
+            'type' => 'Feature',
+            'properties' => array(
+                'type' => $row['type'],
+                'subject' => $row['subject']
+            ),
+            'geometry' => array(
+                'type' => 'Point',
+                'coordinates' => $lnglat
+            )
+        );
+    };
+        
+    $array = array(    
+        'type'=> 'Feature',
+        'features' => $point,
     );
     
     return $array;
@@ -456,6 +502,7 @@ function loginVerify(){
             if(password_verify($password, $row['password'])){
                 session_start(); 
                 $_SESSION['email'] = $row['email'];  
+                $_SESSION['admin'] = $row['admin'];
                 $_SESSION['logged'] = TRUE; 
                 header("Location: profile.php"); // Modify to go to the page you would like 
                 exit; 

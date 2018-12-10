@@ -37,8 +37,8 @@
                     <div class="row">
                         <div class="form-group col-12">
                             <label>What is the type?</label>
-                            <select class="form-control" name="type" id="type">
-                                <option selected>Please Select</option>
+                            <select class="form-control" name="type" id="type" required>
+                                <option value="" selected>Please Select</option>
                                 <?php $types = getIssueTypes();
                                     foreach($types as $t){
                                         echo "<option>$t</option>";
@@ -48,13 +48,13 @@
                         </div>
                         <div class="form-group col-12">
                             <label>What is the subtype?</label>
-                            <select class="form-control" name="subtype" id="subtype">
-                                <option>First select a type</option>
+                            <select class="form-control" name="subtype" id="subtype" required>
+                                <option value="" selected >First select a type</option>
                             </select>
                         </div>
                         <div class="form-group col-12">
                             <label>What is the location of the issue?</label>
-                            <input type="text" name="address" class="form-control" id="autocomplete" placeholder="123 Main Street...">
+                            <input type="text" name="address" class="form-control" id="autocomplete" placeholder="123 Main Street..." required>
                         </div>
                         <div class="form-row d-none">
                             <div class="col-lg-12">
@@ -83,14 +83,18 @@
                         </div>
                         <div class="form-group col-12">
                             <label>What is your email?</label>
-                            <input type="email" name="email" class="form-control" placeholder="johndoe@email.com">
+                            <div class="custom-control custom-checkbox mb-2 ">
+                                <input type="checkbox" class="custom-control-input" id="anonymous">
+                                <label class="custom-control-label" for="anonymous">I'd prefer to stay anonymous</label>
+                            </div>
+                            <input type="email" name="email" id="email" class="form-control" placeholder="johndoe@email.com" required>
                         </div>
                         <div class="form-group col-12">
                             <label>Upload Image</label>
                             <!-- The file input field used as target for the file upload widget -->
                             <div class="custom-file mb-3">
                                 <input type="file" name="filesToUpload[]" class="custom-file-input" id="image-upload" accept="image/*" multiple>
-                                 <label class="custom-file-label" for="customFile">Choose file(s)...</label> 
+                                <label class="custom-file-label" for="customFile">Choose file(s)...</label>
                             </div>
                             <div class="form-row mb-3" id="image-preview"></div>
                         </div>
@@ -112,7 +116,15 @@
     $("#type").change(function() {
         $("#subtype").load("getter.php?choice=" + encodeURI($("#type").val()));
     });
-
+    
+    $("#anonymous").change(function() {
+        if ($("#anonymous").is(":checked")) {
+            $('#email').prop('disabled', true);
+        }
+        else {
+            $('#email').prop('disabled', false);
+        }               
+    });
 </script>
 
 <!--
