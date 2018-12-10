@@ -1,6 +1,10 @@
 <?php include "inc/header.php";
 
-$admin = $_SESSION['admin'];
+if(isset($_SESSION['admin'])){
+    $admin = $_SESSION['admin'];
+}else{
+    $admin = false;
+}
 ?>
 
 <div class="container mt-5">
@@ -8,12 +12,14 @@ $admin = $_SESSION['admin'];
         <div class="col-12">
             <div class="row">
                 <?php $info = getInfo();?>
-                <div class="col-3">
-                    <div id="map-holder" class="p-2 border shadow rounded">
-                        <div id="map" class="w-100"></div>
+                <div class="col-12 mb-4 col-md-3 mb-md-0">
+                    <div class="p-2 border shadow rounded">
+                        <div class="embed-responsive embed-responsive-1by1">
+                            <div id="map" class="embed-responsive-item"></div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-9">
+                <div class="col-12 col-md-9">
                     <div class="mb-2">
                         <div class="d-inline-block mr-5">
                             <a class="border rounded d-inline-block p-1" href="/report.php?report_id=<?php echo $info['id']; ?>">Report ID:
@@ -26,18 +32,18 @@ $admin = $_SESSION['admin'];
                                 <?php echo $info['status']; ?></span>
                         </div>
                         <?php }else{ ?>
-                            <span><b>Status: </b></span>
-                            <div class="dropdown d-inline-block">
-                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown">
-                                    <span class="badge badge-pill badge-warning">
-                                <?php echo $info['status']; ?></span>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a href="#" class="dropdown-item"><span class="badge badge-pill badge-warning">Under Review</span></a>
-                                    <a href="#" class="dropdown-item"><span class="badge badge-pill badge-warning">Assigned</span></a>
-                                    <a href="#" class="dropdown-item"><span class="badge badge-pill badge-warning">Completed</span></a>
-                                </div>
+                        <span><b>Status: </b></span>
+                        <div class="dropdown d-inline-block">
+                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+                                <span class="badge badge-pill badge-warning">
+                                    <?php echo $info['status']; ?></span>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a href="#" class="dropdown-item"><span class="badge badge-pill badge-warning">Under Review</span></a>
+                                <a href="#" class="dropdown-item"><span class="badge badge-pill badge-warning">Assigned</span></a>
+                                <a href="#" class="dropdown-item"><span class="badge badge-pill badge-warning">Completed</span></a>
                             </div>
+                        </div>
                         <?php }
                         ?>
                     </div>
@@ -120,7 +126,7 @@ $admin = $_SESSION['admin'];
     $latlng[1] = $temp;    
     
     ?>
-    
+
     var map = L.map('map').setView([<?php echo implode(",", $latlng); ?>], 16);
 
     L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}', {

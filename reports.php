@@ -19,8 +19,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="mb-3 p-4 bg-white rounded shadow-sm">
-                        <div id="map">
-
+                        <div id="map-holder" class="embed-responsive">
+                            <div id="map" class="embed-responsive-item"></div>
                         </div>
                     </div>
                 </div>
