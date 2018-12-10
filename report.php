@@ -113,10 +113,11 @@ $admin = $_SESSION['admin'];
 <script>
     <?php 
     $latlng = $pointData['features']['geometry']['coordinates'];
-    [$latlng[0], $latlng[1]] = [$latlng[1], $latlng[0]];
     
-//    $latlng = json_encode($latlng);
-    
+    //Flip lat, lng
+    $temp = $latlng[0];
+    $latlng[0] = $latlng[1];
+    $latlng[1] = $temp;    
     
     ?>
     
