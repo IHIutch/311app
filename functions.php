@@ -84,9 +84,7 @@ function createRows(){
         if(!$result){
             die('Query failed.' . mysqli_error($connection));
         } else{
-            $last_id = mysqli_insert_id($connection);
-            header("Location: report.php?report_id=".$last_id); 
-            exit;
+            echo "Record created!";
         }
     }
 }

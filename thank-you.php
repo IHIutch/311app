@@ -1,5 +1,13 @@
-<?php include "inc/header.php"?>
+<?php include "inc/header.php";
 
-<?php createRows(); ?>
+if(empty($_POST['submit'])){ 
+    header("Location: index.php"); 
+    exit; 
+};
 
-<?php uploadImage(); ?>
+createRows(); 
+uploadImage(); 
+    
+$last_id = mysqli_insert_id($connection);
+header("Location: report.php?report_id=".$last_id); 
+?>
