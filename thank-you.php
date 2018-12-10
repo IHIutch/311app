@@ -1,9 +1,10 @@
-<?php include "inc/header.php";
-
+<?php 
 if(empty($_POST['submit'])){ 
     header("Location: index.php"); 
     exit; 
 };
+
+include "functions.php";
 
 createRows(); 
 uploadImage(); 
