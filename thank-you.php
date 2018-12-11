@@ -6,9 +6,9 @@ if(empty($_POST['submit'])){
 
 include "functions.php";
 
-createRows(); 
-uploadImage(); 
-    
+$create_row = createRows(); 
 $last_id = mysqli_insert_id($connection);
-header("Location: report.php?report_id=".$last_id); 
+$upload_image = uploadImage(); 
+
+uploadInfo($create_row, $upload_image, $last_id)
 ?>
