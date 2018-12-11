@@ -54,7 +54,7 @@
                         </div>
                         <div class="form-group col-12">
                             <label>What is the location of the issue?</label>
-                            <input type="search" name="address" class="form-control" id="autocomplete" placeholder="123 Main Street..." required>
+                            <input type="search" name="search" class="form-control" id="autocomplete" placeholder="123 Main Street..." required>
                         </div>
                         <div class="form-row d-none">
                             <div class="col-lg-12">
