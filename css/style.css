@@ -1,24 +1,25 @@
-
-  /* Always set the map height explicitly to define the size of the div
+/* Always set the map height explicitly to define the size of the div
    * element that contains the map. */
-  #map-holder {
+#map-holder {
     height: 400px;
-  }
-  /* Optional: Makes the sample page fill the window. */
-  html, body {
+}
+
+/* Optional: Makes the sample page fill the window. */
+html,
+body {
     height: 100%;
     margin: 0;
     padding: 0;
-  }
+}
 
-.max-height{
+.max-height {
     height: 100vh;
 }
 
 .map-overlay {
     font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
     background-color: #fff;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.10);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.10);
     border-radius: 3px;
     position: absolute;
     width: 25%;
@@ -29,20 +30,105 @@
 }
 
 .footer {
-  background-color: #f5f5f5;
+    background-color: #f5f5f5;
 }
 
-#statusReview{
+#statusReview {
     background-color: #ff8100;
     color: black;
 }
 
-#statusAssigned{
+#statusAssigned {
     background-color: #ffc200;
     color: black;
 }
 
-#statusCompleted{
+#statusCompleted {
     background-color: #46de69;
     color: black;
+}
+
+.leaflet-popup-content {
+    padding: .75rem;
+    margin: 0;
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 4px;
+}
+
+.leaflet-popup-content-wrapper:before {
+    content: '';
+    width: 100%;
+    height: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: lime;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.dept-of-public-works > .leaflet-popup-content-wrapper:before{
+    background-color: #f3bc7d !important
+}
+
+.office-of-strategic-planning > .leaflet-popup-content-wrapper:before{
+    background-color: #5a0082 !important
+}
+
+.office-of-the-mayor > .leaflet-popup-content-wrapper:before{
+    background-color: #ef30a4 !important
+}
+
+.dpis > .leaflet-popup-content-wrapper:before{
+    background-color: #371b7a !important
+}
+
+.utilities > .leaflet-popup-content-wrapper:before{
+    background-color: #b3ad00 !important
+}
+
+.human-resources > .leaflet-popup-content-wrapper:before{
+    background-color: #4ba2ff !important
+}
+
+.dept-of-law > .leaflet-popup-content-wrapper:before{
+    background-color: #c52b06 !important
+}
+
+.assessment-taxation > .leaflet-popup-content-wrapper:before{
+    background-color: #2bdebe !important
+}
+
+.buffalo-fire-department > .leaflet-popup-content-wrapper:before{
+    background-color: #c6001d !important
+}
+
+.community-services-rec-program > .leaflet-popup-content-wrapper:before{
+    background-color: #6cdc8c !important
+}
+
+.buffalo-municipal-housing-authority > .leaflet-popup-content-wrapper:before{
+    background-color: #7a0069 !important
+}
+
+.buffalo-police-department > .leaflet-popup-content-wrapper:before{
+    background-color: #019457 !important
+}
+
+.dept-of-parking > .leaflet-popup-content-wrapper:before{
+    background-color: #ff3561 !important
+}
+
+.city-clerk > .leaflet-popup-content-wrapper:before{
+    background-color: #019895 !important
+}
+
+.miscellaneous > .leaflet-popup-content-wrapper:before{
+    background-color: #629d00 !important
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+    padding-top: 9px;
 }

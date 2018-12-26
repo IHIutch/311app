@@ -1,27 +1,5 @@
-<?php include "inc/header.php"?>
+<?php include "inc/header.php";?>
 
-<script src="plugins/jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
-<script src="plugins/jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
-<script src="plugins/jQuery-File-Upload/js/jquery.fileupload.js"></script>
-
-<!--
-<div class="nav-scroller bg-white shadow-sm">
-    <nav class="nav nav-underline">
-        <a class="nav-link active" href="#">Dashboard</a>
-        <a class="nav-link" href="#">
-            Friends
-            <span class="badge badge-pill bg-light align-text-bottom">27</span>
-        </a>
-        <a class="nav-link" href="#">Explore</a>
-        <a class="nav-link" href="#">Suggestions</a>
-        <a class="nav-link" href="#">Link</a>
-        <a class="nav-link" href="#">Link</a>
-        <a class="nav-link" href="#">Link</a>
-        <a class="nav-link" href="#">Link</a>
-        <a class="nav-link" href="#">Link</a>
-    </nav>
-</div>
--->
 <main role="main" class="container mt-5">
     <div class="row">
         <div class="col-12 col-md-8 offset-md-2">
@@ -39,7 +17,8 @@
                             <label>What is the type?</label>
                             <select class="form-control" name="type" id="type" required>
                                 <option value="" selected>Please Select</option>
-                                <?php $types = getIssueTypes();
+                                <?php 
+                                    $types = getIssueTypes();
                                     foreach($types as $t){
                                         echo "<option>$t</option>";
                                     };
@@ -49,7 +28,7 @@
                         <div class="form-group col-12">
                             <label>What is the subtype?</label>
                             <select class="form-control" name="subtype" id="subtype" required>
-                                <option value="" selected >First select a type</option>
+                                <option value="" selected>First select a type</option>
                             </select>
                         </div>
                         <div class="form-group col-12">
@@ -114,17 +93,17 @@
 
 <script>
     $("#type").change(function() {
-        $("#subtype").load("getter.php?choice=" + encodeURI($("#type").val()));
+        $("#subtype").load("getter.php?choice=" + encodeURIComponent($("#type").val()));
     });
-    
+
     $("#anonymous").change(function() {
         if ($("#anonymous").is(":checked")) {
             $('#email').prop('disabled', true);
-        }
-        else {
+        } else {
             $('#email').prop('disabled', false);
-        }               
+        }
     });
+
 </script>
 
 <!--

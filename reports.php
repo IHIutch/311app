@@ -81,6 +81,7 @@
                     </div>
                 </div>
             </div>
+<!--
             <div class="row">
                 <div class="col-12 text-center">
                     <nav aria-label="Page navigation" class="d-inline-block">
@@ -104,6 +105,7 @@
                     </nav>
                 </div>
             </div>
+-->
         </div>
     </div>
 </div>
@@ -203,18 +205,38 @@
                 };
             default:
                 return {
-                    color: 'red'
+                    color: 'lime'
                 };
         }
     };
+    
+//    var popupContent = L.popup({className: 'if-you-need-a-class'})
+//        .setContent('<h3 class="if-you-need-div">' + feature.properties.type + '</h3>');
 
+    function popUp(layer){
+        return '<div class="d-inline-block border rounded px-1 mb-1"><b>#' + layer.feature.properties.id + '</b></div><h6 class="mb-0">' + layer.feature.properties.address + '</h6>' + 
+        '<span class="text-muted d-block mb-2 small">(' + layer.feature.properties.coords + ')</span>' +
+        '<span class="d-block">' + layer.feature.properties.subtype + '</span>' +
+        '<a href="/report.php?report_id=' + layer.feature.properties.id + '">Go to Report</a>'
+    };
+    
+    function customClass(layer){
+        var className = layer.feature.properties.subject
+        className = className.replace(/\W+/g, '-').toLowerCase()
+        return className
+    };
+    
     L.geoJSON(points, {
         style: style,
         pointToLayer: function(feature, latlng) {
             return L.circleMarker(latlng, pointStyle);
+        },
+        onEachFeature: function(feature, layer){
+            layer.bindPopup(popUp(layer), {className: customClass(layer)})
+//            layer.bindPopup(popUp)
         }
     }).addTo(map);
-
+        
 </script>
 
 <?php include "inc/footer.php"?>

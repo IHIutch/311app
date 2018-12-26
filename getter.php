@@ -3,7 +3,10 @@
     
     global $connection;
     
-    $choice = mysqli_real_escape_string($connection, $_GET['choice']);
+    $choice = urldecode(mysqli_real_escape_string($connection, $_GET['choice']));
+
+//    echo $choice;
+
 	$query = "SELECT * FROM issue_types WHERE type = '$choice'";
 
     //Return error if connection fails

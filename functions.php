@@ -168,7 +168,7 @@ function getPoints(){
     
     global $connection;
     
-    $query = "SELECT lat, lng, subject, type FROM reports";
+    $query = "SELECT lat, lng, subject, subtype, street_name, street_num, id FROM reports";
     
     //Return error if connection fails
     $result = mysqli_query($connection, $query);
@@ -179,13 +179,20 @@ function getPoints(){
         // Puts Stop Data into an array
     while ($row = mysqli_fetch_assoc($result)){
         
+    $street_name = str_ireplace(array("boulevard","avenue", "street", "road", "terrace", "highway"), 
+                               array("Blvd", "Ave", "St", "Rd", "Terr", "Hwy"),
+                               $row['street_name']);
+        
         $lnglat = array($row['lng'], $row['lat']);
         
         $points[] = array(
             'type' => 'Feature',
             'properties' => array(
-                'type' => $row['type'],
-                'subject' => $row['subject']
+                'subtype' => $row['subtype'],
+                'subject' => $row['subject'],
+                'id' => $row['id'],
+                'address' => $row['street_num'] . ' ' . $street_name,
+                'coords' => $row['lat'] . ', ' . $row['lng'],
             ),
             'geometry' => array(
                 'type' => 'Point',
@@ -538,7 +545,9 @@ function showUserData($email){
 
 function uploadInfo($create_row,$upload_image,$last_id){
     if ($create_row == true && $upload_image == true){
-        sendEmail();
+        
+        $emailType = 'reportCreated';
+        sendEmail($emailType, $last_id);
         
         header("Location: report.php?report_id=".$last_id);  
     }else{
@@ -546,8 +555,34 @@ function uploadInfo($create_row,$upload_image,$last_id){
     }
 }
 
-function sendEmail(){
-    include 'emails/submit-ticket.php';
+function sendEmail($emailType, $emailData){
+    if($emailType == 'reportCreated'){
+        global $connection;
+        
+        $query = "SELECT id, email, street_num, street_name, type, subtype, zip FROM reports WHERE id = '$emailData'";
+        $result = mysqli_query($connection, $query);
+        
+        while ($row = mysqli_fetch_assoc($result)){
+            $data = $row;
+        }
+        
+        if(!data['email'] == ''){
+            include 'emails/submit-ticket.php';
+        }
+    }else if($emailType == 'statusUpdate'){
+        global $connection;
+        
+        $query = "SELECT id, email, street_num, street_name, type, subtype, zip, status FROM reports WHERE id = '$emailData'";
+        $result = mysqli_query($connection, $query);
+        
+        while ($row = mysqli_fetch_assoc($result)){
+            $data = $row;
+        }
+        
+        if(!data['email'] == ''){
+            include 'emails/status-update.php';
+        }
+    }
 }
 
 function updateStatus($report_id, $status){
@@ -559,7 +594,8 @@ function updateStatus($report_id, $status){
     if (!$result) {
       die('Invalid query: ' . mysqli_error($connection));
     }else{
-//        sendEmail();
+        $emailType = 'statusUpdate';
+        sendEmail($emailType, $report_id);
     }
 }
 

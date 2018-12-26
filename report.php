@@ -81,9 +81,14 @@ if(isset($_POST['status'])){
                             <?php echo date("F d, Y", $open); ?>
                         </div>
                         <div class="d-inline">
-                            <?php $closed = strtotime($info['closed_date']); ?>
+                            <?php  ?>
                             <b>Closed Date:</b>
-                            <?php echo date("F d, Y", $closed); ?>
+                            <?php 
+                                if($info['closed_date'] != null){
+                                    $closed = strtotime($info['closed_date']);
+                                    echo date("F d, Y", $closed);
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -182,8 +187,8 @@ if(isset($_POST['status'])){
         var modal = $(this)
 
         $('#modalStatus').find('span').html(text)
-        $('#modalStatus').find('span').attr('id', status)
-        $('#status').val(status)
+//        $('#modalStatus').find('span').attr('id', status)
+        $('#status').val(text)
     });
 
 </script>

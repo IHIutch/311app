@@ -10,5 +10,5 @@ $create_row = createRows();
 $last_id = mysqli_insert_id($connection);
 $upload_image = uploadImage(); 
 
-//uploadInfo($create_row, $upload_image, $last_id)
+uploadInfo($create_row, $upload_image, $last_id)
 ?>
