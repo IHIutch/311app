@@ -547,7 +547,7 @@ function uploadInfo($create_row,$upload_image,$last_id){
     if ($create_row == true && $upload_image == true){
         
         $emailType = 'reportCreated';
-        sendEmail($emailType, $last_id);
+//        sendEmail($emailType, $last_id);
         
         header("Location: report.php?report_id=".$last_id);  
     }else{
@@ -595,7 +595,7 @@ function updateStatus($report_id, $status){
       die('Invalid query: ' . mysqli_error($connection));
     }else{
         $emailType = 'statusUpdate';
-        sendEmail($emailType, $report_id);
+//        sendEmail($emailType, $report_id);
     }
 }
 
