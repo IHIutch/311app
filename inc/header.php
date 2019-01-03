@@ -4,11 +4,20 @@
 
 <head>
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131688928-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-131688928-1');
+    </script>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>311 App</title>
+    <title>Buffalo 311 (Beta)</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
@@ -42,7 +51,7 @@
     <?php include_once './config.php'?>
     <?php include ROOT.'autoload.php'?>
     <?php include ROOT.'functions.php'?>
-    
+
 </head>
 
 <body class="bg-light">
@@ -54,7 +63,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-           <?php if (isset($_SESSION['logged']) && $_SESSION['logged']){ ?>
+            <?php if (isset($_SESSION['logged']) && $_SESSION['logged']){ ?>
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item mx-md-2 my-2 my-md-0">

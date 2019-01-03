@@ -83,7 +83,7 @@
                             <textarea class="form-control" name="comments" rows="3" placeholder="Comments..."></textarea>
                         </div>
                         <div class="form-group col-12">
-                            <input class="btn btn-primary" type="submit" name="submit" value="Submit Your Report">
+                            <input class="btn btn-primary" id="submitButton" type="submit" name="submit" value="Submit Your Report">
                         </div>
                     </div>
                 </form>
@@ -104,6 +104,12 @@
             $('#email').prop('disabled', false);
         }
     });
+
+//    $(function() { 
+//        $("#submitButton").click(function() { 
+//            $(this).addClass("disabled"); 
+//        });
+//    });
 
 </script>
 
@@ -206,7 +212,7 @@
 
             $(reader).on("load", function() {
 
-//                $preview.append('<div id="test" class="col-3"></div>');
+                //                $preview.append('<div id="test" class="col-3"></div>');
                 $preview.append($('<div/>', {
                         class: 'col-3'
                     })
