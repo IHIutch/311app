@@ -1,5 +1,4 @@
-<?php include "inc/header.php";
-
+<?php 
 if(isset($_SESSION['admin'])){
     $admin = $_SESSION['admin'];
 }else{
@@ -7,8 +6,13 @@ if(isset($_SESSION['admin'])){
 }
 
 if(isset($_POST['status'])){
+    
+    $status = mysqli_real_escape_string($connection, $_POST['status']);
+    $report_id = mysqli_real_escape_string($connection, $_GET['report_id']);
     updateStatus($report_id, $status);
 }
+
+include "inc/header.php";
 ?>
 
 <div class="container mt-4">

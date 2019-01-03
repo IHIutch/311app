@@ -595,9 +595,6 @@ function sendEmail($emailType, $emailData){
 
 function updateStatus($report_id, $status){
     global $connection;
-    
-    $status = mysqli_real_escape_string($connection, $_POST['status']);
-    $report_id = mysqli_real_escape_string($connection, $_GET['report_id']);
         
     $query = "UPDATE reports SET status = '$status' WHERE id='$report_id'";
     $result = mysqli_query($connection, $query);
