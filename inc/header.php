@@ -3,6 +3,16 @@
 <html lang="en">
 
 <head>
+    
+        <?php 
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+    ?>
+
+    <?php include_once './config.php'?>
+    <?php include ROOT.'autoload.php'?>
+    <?php include ROOT.'functions.php'?>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,17 +41,6 @@
     <script type="text/javascript" src="plugins/DataTables/datatables.min.js"></script>
 
     <link rel="stylesheet" href="css/style.css">
-
-
-    <?php 
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-    ?>
-
-    <?php include_once './config.php'?>
-    <?php include ROOT.'autoload.php'?>
-    <?php include ROOT.'functions.php'?>
     
 </head>
 
