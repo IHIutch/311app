@@ -3,6 +3,8 @@
     use Mailgun\Mailgun;
 
     # Instantiate the client.
+    $key = env('MAILGUN')
+    $mgClient = new Mailgun($key);
     $domain = "beta.buffalo311.org";
 
     $html = file_get_contents(__DIR__.'/templates/submit-ticket.html');

@@ -12,8 +12,8 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
@@ -31,7 +31,6 @@
     <script type="text/javascript" src="plugins/DataTables/datatables.min.js"></script>
 
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/offcanvas.css">
 
 
     <?php 
@@ -41,52 +40,51 @@
     ?>
 
     <?php include_once './config.php'?>
+    <?php include ROOT.'autoload.php'?>
     <?php include ROOT.'functions.php'?>
+    
 </head>
 
 <body class="bg-light">
+
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
         <div class="container">
-            <?php if (isset($_SESSION['logged']) && $_SESSION['logged'] == true){ ?>
             <a class="navbar-brand mr-auto mr-lg-0" href="/">Buffalo 311</a>
-            <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+            <button class="navbar-toggler collapsed border-0 p-0" type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+           <?php if (isset($_SESSION['logged']) && $_SESSION['logged']){ ?>
+            <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item mx-md-2 my-2 my-md-0">
                         <a class="nav-link" href="/">Create a Report</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mx-md-2 my-2 my-md-0">
                         <a class="nav-link" href="reports.php">Reports</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mx-md-2 my-2 my-md-0">
                         <a class="nav-link" href="profile.php">Your Account</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mx-md-2 my-2 my-md-0">
                         <a class="nav-link" href="logout.php">Log Out</a>
                     </li>
                 </ul>
             </div>
             <?php }else{ ?>
-            <a class="navbar-brand mr-auto mr-lg-0" href="/">Buffalo 311</a>
-            <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
-            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+            <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item mx-md-2 my-2 my-md-0">
                         <a class="nav-link" href="/">Create a Report</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mx-md-2 my-2 my-md-0">
                         <a class="nav-link" href="reports.php">Reports</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mx-md-2 my-2 my-md-0">
                         <a class="nav-link" href="login.php">Log In</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mx-md-2 my-2 my-md-0">
                         <a class="btn btn-primary" href="register.php">Register</a>
                     </li>
                 </ul>

@@ -1,14 +1,15 @@
 <?php include "inc/header.php";
 
-$newUser = doesUserExist();
-
+if(isset($_POST['email'])){
+    $userExists = doesUserExist($_POST['email']);
+};
 ?>
 
 <div class="container">
     <div class="row">
         <div class="col-12 col-md-6 offset-md-3 mt-5">
             
-            <?php if($newUser){
+            <?php if(isset($_POST['email']) && !$userExists){
                     if(createNewUser()){ ?>
                 <div class="card p-4 mt-5">
                     <h1>Success</h1>
@@ -29,7 +30,7 @@ $newUser = doesUserExist();
                 <div class="form-group">
                     <label>Email address</label>
                     <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" required>
-                    <?php if(isset($newUser)){ ?>
+                    <?php if(isset($_POST['email']) && $userExists){ ?>
                     <small id="emailHelp" class="form-text text-danger">That email is already in use.</small>
                     <?php } ?>
                 </div>

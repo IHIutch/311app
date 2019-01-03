@@ -1,5 +1,5 @@
 <?php include "inc/header.php"?>
-<div class="container bg-light">
+<div class="container bg-light mt-4">
     <div class="row">
         <div class="col-12">
             <div class="row">
@@ -65,7 +65,7 @@
                                             <?php echo $d['zip'] ?>
                                         </td>
                                         <td>
-                                            <span class="badge badge-pill badge-warning">
+                                            <span class="badge badge-pill status-<?php echo preg_replace("/[\s_]/", "-", strtolower($d['status']));?>">
                                                 <?php echo $d['status'] ?></span>
                                         </td>
                                         <td>
@@ -129,7 +129,7 @@
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
         id: 'mapbox.streets',
-        accessToken: 'pk.eyJ1IjoiamJodXRjaCIsImEiOiJjamRqZGU1eTYxMTZlMzNvMjV2dGxzdG8wIn0.IAAk5wKeLXOUaQ4QYF3sEA'
+        accessToken: '<?php echo env('MAPBOX');?>'
     }).addTo(map);
 
     <?php $points = getPoints();?>

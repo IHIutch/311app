@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12 col-md-8 offset-md-2">
             <div class="border-bottom pb-2 mb-3">
-                <h1 class="h1">Submit an Issue</h1>
+                <h1 class="h1">Create a Report</h1>
             </div>
         </div>
     </div>
@@ -14,7 +14,7 @@
                 <form action="thank-you.php" method="post" enctype="multipart/form-data" id="myForm">
                     <div class="row">
                         <div class="form-group col-12">
-                            <label>What is the type?</label>
+                            <label>Select a Category</label>
                             <select class="form-control" name="type" id="type" required>
                                 <option value="" selected>Please Select</option>
                                 <?php 
@@ -26,7 +26,7 @@
                             </select>
                         </div>
                         <div class="form-group col-12">
-                            <label>What is the subtype?</label>
+                            <label>Select an Issue</label>
                             <select class="form-control" name="subtype" id="subtype" required>
                                 <option value="" selected>First select a type</option>
                             </select>
@@ -61,12 +61,13 @@
                             </div>
                         </div>
                         <div class="form-group col-12">
-                            <label>What is your email?</label>
+                            <label class="m-0">What is your email?</label>
+                            <small id="emailHelp" class="form-text text-muted mt-0 mb-1">Add your to get email notifications about your submission.</small>
+                            <input type="email" name="email" id="email" class="form-control mb-2" placeholder="johndoe@email.com" required>
                             <div class="custom-control custom-checkbox mb-2 ">
                                 <input type="checkbox" class="custom-control-input" id="anonymous">
                                 <label class="custom-control-label" for="anonymous">I'd prefer to stay anonymous</label>
                             </div>
-                            <input type="email" name="email" id="email" class="form-control" placeholder="johndoe@email.com" required>
                         </div>
                         <div class="form-group col-12">
                             <label>Upload Image</label>
@@ -78,11 +79,11 @@
                             <div class="form-row mb-3" id="image-preview"></div>
                         </div>
                         <div class="form-group col-12">
-                            <label>Additional Comments</label>
+                            <label>Add any additional comments you think would be helpful:</label>
                             <textarea class="form-control" name="comments" rows="3" placeholder="Comments..."></textarea>
                         </div>
                         <div class="form-group col-12">
-                            <input class="btn btn-primary" type="submit" name="submit" value="Submit">
+                            <input class="btn btn-primary" type="submit" name="submit" value="Submit Your Report">
                         </div>
                     </div>
                 </form>
@@ -205,7 +206,7 @@
 
             $(reader).on("load", function() {
 
-                //                $preview.append('<div id="test" class="col-3"></div>');
+//                $preview.append('<div id="test" class="col-3"></div>');
                 $preview.append($('<div/>', {
                         class: 'col-3'
                     })
@@ -294,6 +295,6 @@
 
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1hgyqHWtrkaolwztdX5G_nc2nFdFgyis&libraries=places&callback=initAutocomplete" async defer>
+<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo env('GOOGLE');?>&libraries=places&callback=initAutocomplete" async defer>
 </script>
 <?php include "inc/footer.php"?>

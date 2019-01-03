@@ -1,3 +1,4 @@
 config.php
 lib
 node_modules
+env.php

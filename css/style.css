@@ -4,12 +4,8 @@
     height: 400px;
 }
 
-/* Optional: Makes the sample page fill the window. */
-html,
 body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+  padding-top: 56px;
 }
 
 .max-height {
@@ -33,19 +29,39 @@ body {
     background-color: #f5f5f5;
 }
 
-#statusReview {
-    background-color: #ff8100;
+#statusReview,
+.status-submitted {
+    background-color: #ffa600;
     color: black;
 }
 
-#statusAssigned {
-    background-color: #ffc200;
-    color: black;
+#statusReview,
+.status-under-review {
+    background-color: #ff6361;
+    color: white;
 }
 
-#statusCompleted {
-    background-color: #46de69;
-    color: black;
+#statusAssigned,
+.status-assigned {
+    background-color: #bc5090;
+    color: white;
+}
+
+#statusScheduled,
+.status-scheduled {
+    background-color: #58508d;
+    color: white;
+}
+
+#statusCompleted,
+.status-completed {
+    background-color: #003f5c;
+    color: white;
+}
+
+.badge-pill {
+    text-transform: capitalize;
+    font-weight: 600 !important;
 }
 
 .leaflet-popup-content {
@@ -69,66 +85,74 @@ body {
     border-top-right-radius: 4px;
 }
 
-.dept-of-public-works > .leaflet-popup-content-wrapper:before{
+.dept-of-public-works > .leaflet-popup-content-wrapper:before {
     background-color: #f3bc7d !important
 }
 
-.office-of-strategic-planning > .leaflet-popup-content-wrapper:before{
+.office-of-strategic-planning > .leaflet-popup-content-wrapper:before {
     background-color: #5a0082 !important
 }
 
-.office-of-the-mayor > .leaflet-popup-content-wrapper:before{
+.office-of-the-mayor > .leaflet-popup-content-wrapper:before {
     background-color: #ef30a4 !important
 }
 
-.dpis > .leaflet-popup-content-wrapper:before{
+.dpis > .leaflet-popup-content-wrapper:before {
     background-color: #371b7a !important
 }
 
-.utilities > .leaflet-popup-content-wrapper:before{
+.utilities > .leaflet-popup-content-wrapper:before {
     background-color: #b3ad00 !important
 }
 
-.human-resources > .leaflet-popup-content-wrapper:before{
+.human-resources > .leaflet-popup-content-wrapper:before {
     background-color: #4ba2ff !important
 }
 
-.dept-of-law > .leaflet-popup-content-wrapper:before{
+.dept-of-law > .leaflet-popup-content-wrapper:before {
     background-color: #c52b06 !important
 }
 
-.assessment-taxation > .leaflet-popup-content-wrapper:before{
+.assessment-taxation > .leaflet-popup-content-wrapper:before {
     background-color: #2bdebe !important
 }
 
-.buffalo-fire-department > .leaflet-popup-content-wrapper:before{
+.buffalo-fire-department > .leaflet-popup-content-wrapper:before {
     background-color: #c6001d !important
 }
 
-.community-services-rec-program > .leaflet-popup-content-wrapper:before{
+.community-services-rec-program > .leaflet-popup-content-wrapper:before {
     background-color: #6cdc8c !important
 }
 
-.buffalo-municipal-housing-authority > .leaflet-popup-content-wrapper:before{
+.buffalo-municipal-housing-authority > .leaflet-popup-content-wrapper:before {
     background-color: #7a0069 !important
 }
 
-.buffalo-police-department > .leaflet-popup-content-wrapper:before{
+.buffalo-police-department > .leaflet-popup-content-wrapper:before {
     background-color: #019457 !important
 }
 
-.dept-of-parking > .leaflet-popup-content-wrapper:before{
+.dept-of-parking > .leaflet-popup-content-wrapper:before {
     background-color: #ff3561 !important
 }
 
-.city-clerk > .leaflet-popup-content-wrapper:before{
+.city-clerk > .leaflet-popup-content-wrapper:before {
     background-color: #019895 !important
 }
 
-.miscellaneous > .leaflet-popup-content-wrapper:before{
+.miscellaneous > .leaflet-popup-content-wrapper:before {
     background-color: #629d00 !important
 }
 
 .leaflet-container a.leaflet-popup-close-button {
     padding-top: 9px;
+}
+
+.embed-responsive-item.img-thumbnail {
+    border: 1px solid #dee2e6 !important;
+}
+
+.navbar-dark .navbar-nav .nav-link{
+    color: #fff;
 }

@@ -1,6 +1,8 @@
 <?php
 include __DIR__.'/lib/db.php';
 
+date_default_timezone_set('America/New_York');
+
 function showAllData(){
     global $connection;
     $query = "SELECT * FROM map_locations";
@@ -455,21 +457,21 @@ function login(){
 
 };
 
-function doesUserExist(){
+function doesUserExist($email){
     
     global $connection;
     
-    if(isset($_POST['email']) && isset($_POST['password'])){
-        $email = mysqli_real_escape_string($connection, $_POST['email']);
+    if($email != ''){
+        $email = mysqli_real_escape_string($connection, $email);
         $result = mysqli_query($connection, "SELECT * FROM users WHERE email = '$email'");
 
         if(mysqli_num_rows($result) > 0){
-            return false;
-        }else{
             return true;
+        }else{
+            return false;
         } 
     }else{
-        return null;
+        exit();
     }
 }
 
@@ -582,6 +584,12 @@ function sendEmail($emailType, $emailData){
         if(!data['email'] == ''){
             include 'emails/status-update.php';
         }
+    }elseif($emailType == 'passwordReset'){
+        global $connection;
+        $email = $emailData['email'];
+        $token = $emailData['token'];
+        
+        include 'emails/reset-pw.php';
     }
 }
 
@@ -597,6 +605,55 @@ function updateStatus($report_id, $status){
         $emailType = 'statusUpdate';
 //        sendEmail($emailType, $report_id);
     }
+}
+
+function pw_reset(){
+    global $connection;
+    
+    $email = $_POST['email'];
+    
+    // Create tokens
+    $token = sha1(time() . mt_rand(1,99999999));
+
+    // Token expiration
+    $expires = new DateTime('NOW');
+    $expires->add(new DateInterval('PT1H')); // 1 hour
+    $expires = $expires->format('U');
+            
+    $query = "UPDATE users SET token = '$token', expires = '$expires' WHERE email='$email'";
+    $result = mysqli_query($connection, $query);
+    
+    $emailData = array('email' => $email, 'token' => $token);
+    
+    if (!$result) {
+      die('Invalid query: ' . mysqli_error($connection));
+    }else{
+        $emailType = 'passwordReset';
+        sendEmail($emailType, $emailData);
+    } 
+}
+
+function updatePassword(){
+    if(isset($_POST['password'])){
+        global $connection;
+        
+        $token = mysqli_real_escape_string($connection, $_GET['code']);
+        $password = mysqli_real_escape_string($connection, $_POST['password']);
+    
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        
+        $query = "UPDATE users SET password = '$password' WHERE token = '$token'";
+        
+        $result = mysqli_query($connection, $query);
+
+        if(!$result){
+            die("Password update didn't work. Click the link in your email and try again");
+        }else{
+            return true;
+        } 
+    }else{
+        return false;
+    }            
 }
 
 ?>

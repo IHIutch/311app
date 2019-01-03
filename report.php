@@ -15,7 +15,7 @@ if(isset($_POST['status'])){
 }
 ?>
 
-<div class="container mt-5">
+<div class="container mt-4">
     <div class="row">
         <div class="col-12">
             <div class="row">
@@ -36,14 +36,14 @@ if(isset($_POST['status'])){
                         <?php 
                             if(!$admin){ ?>
                         <div class="d-inline-block">
-                            <span><b>Status: </b></span><span class="badge badge-pill">
+                            <span><b>Status: </b></span><span class="badge badge-pill status-<?php echo preg_replace("/[\s_]/", "-", strtolower($info['status'])); ?>">
                                 <?php echo $info['status']; ?></span>
                         </div>
                         <?php }else{ ?>
                         <span><b>Status: </b></span>
                         <div class="dropdown d-inline-block">
                             <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown">
-                                <span class="badge badge-pill">
+                                <span class="badge badge-pill status-<?php echo preg_replace("/[\s_]/", "-", strtolower($info['status']));?>">
                                     <?php echo $info['status']; ?></span>
                             </button>
                             <div class="dropdown-menu">
@@ -108,7 +108,7 @@ if(isset($_POST['status'])){
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="row">
+                    <div class="form-row">
                         <div class="col-12 mb-2">
                             <b>Photos:</b>
                         </div>
@@ -118,8 +118,8 @@ if(isset($_POST['status'])){
                             foreach($images as $key){
                                 foreach($key as $k => $v){ ?>
                         <div class="col-6">
-                            <a href="#">
-                                <img src="uploads/<?php echo $v; ?>" class="w-100 img-thumbnail" data-toggle="modal" data-target="#imageModal">
+                            <a href="#" class="embed-responsive embed-responsive-1by1 mb-2">
+                                <img src="uploads/<?php echo $v; ?>" class="w-100 img-thumbnail embed-responsive-item" style="object-fit: cover;" data-toggle="modal" data-target="#imageModal">
                             </a>
                         </div>
                         <?php }
@@ -211,7 +211,7 @@ if(isset($_POST['status'])){
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
         id: 'mapbox.streets',
-        accessToken: 'pk.eyJ1IjoiamJodXRjaCIsImEiOiJjamRqZGU1eTYxMTZlMzNvMjV2dGxzdG8wIn0.IAAk5wKeLXOUaQ4QYF3sEA'
+        accessToken: '<?php echo env('MAPBOX'); ?>'
     }).addTo(map);
 
     var point = <?php echo json_encode($pointData['features']); ?>;

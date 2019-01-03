@@ -17,6 +17,9 @@
                 </div>
                 <input class="btn btn-primary" type="submit" name="submit" id="register" value="Log In" />
             </form>
+            <div class="text-center">
+                <a class="small" href="/forgot.php">Forgot your password?</a>
+            </div>
         </div>
     </div>
 </div>
