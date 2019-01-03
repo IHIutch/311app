@@ -53,7 +53,7 @@
                                             <?php echo $d['id']?>
                                         </th>
                                         <td>
-                                            <?php echo date('m.d.y', strtotime($d['submission_date']))?>
+                                            <?php echo date('m/d/y', strtotime($d['submission_date']))?>
                                         </td>
                                         <td>
                                             <?php echo $d['lat'] . ', ' . $d['lng']?>
