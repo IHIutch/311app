@@ -1,9 +1,4 @@
 <?php 
-if(isset($_SESSION['admin'])){
-    $admin = $_SESSION['admin'];
-}else{
-    $admin = false;
-}
 
 if(isset($_POST['status'])){
     
@@ -13,6 +8,12 @@ if(isset($_POST['status'])){
 }
 
 include "inc/header.php";
+
+if(isset($_SESSION['admin'])){
+    $admin = $_SESSION['admin'];
+}else{
+    $admin = false;
+}
 ?>
 
 <div class="container mt-4">
