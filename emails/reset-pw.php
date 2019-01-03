@@ -9,7 +9,7 @@
 
     $html = file_get_contents(__DIR__.'/templates/reset-pw.html');
 
-    $link = 'https://beta.buffalo311.org/reset.php?code='.$token;
+    $link = $_SERVER['SERVER_NAME'].'/reset.php?code='.$token;
     $html = str_replace("#link#",$link,$html);
     $toEmail = '<'.$email.'>';
 
