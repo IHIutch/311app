@@ -546,10 +546,10 @@ function showUserData($email){
 }
 
 function uploadInfo($create_row,$upload_image,$last_id){
-    if ($create_row == true && $upload_image == true){
+    if ($create_row && $upload_image){
         
         $emailType = 'reportCreated';
-//        sendEmail($emailType, $last_id);
+        sendEmail($emailType, $last_id);
         
         header("Location: report.php?report_id=".$last_id);  
     }else{
@@ -558,8 +558,10 @@ function uploadInfo($create_row,$upload_image,$last_id){
 }
 
 function sendEmail($emailType, $emailData){
+    global $connection;
+    $mgKey = env('MAILGUN');
+
     if($emailType == 'reportCreated'){
-        global $connection;
         
         $query = "SELECT id, email, street_num, street_name, type, subtype, zip FROM reports WHERE id = '$emailData'";
         $result = mysqli_query($connection, $query);
@@ -568,11 +570,10 @@ function sendEmail($emailType, $emailData){
             $data = $row;
         }
         
-        if(!data['email'] == ''){
+        if($data['email'] != ''){
             include 'emails/submit-ticket.php';
         }
     }else if($emailType == 'statusUpdate'){
-        global $connection;
         
         $query = "SELECT id, email, street_num, street_name, type, subtype, zip, status FROM reports WHERE id = '$emailData'";
         $result = mysqli_query($connection, $query);
@@ -581,11 +582,10 @@ function sendEmail($emailType, $emailData){
             $data = $row;
         }
         
-        if(!data['email'] == ''){
+        if($data['email'] != ''){
             include 'emails/status-update.php';
         }
     }elseif($emailType == 'passwordReset'){
-        global $connection;
         $email = $emailData['email'];
         $token = $emailData['token'];
         
@@ -595,6 +595,9 @@ function sendEmail($emailType, $emailData){
 
 function updateStatus($report_id, $status){
     global $connection;
+    
+    $status = mysqli_real_escape_string($connection, $_POST['status']);
+    $report_id = mysqli_real_escape_string($connection, $_GET['report_id']);
         
     $query = "UPDATE reports SET status = '$status' WHERE id='$report_id'";
     $result = mysqli_query($connection, $query);
@@ -603,7 +606,9 @@ function updateStatus($report_id, $status){
       die('Invalid query: ' . mysqli_error($connection));
     }else{
         $emailType = 'statusUpdate';
-//        sendEmail($emailType, $report_id);
+        sendEmail($emailType, $report_id);
+        header("Location: report.php?report_id=" . $report_id);
+        exit;
     }
 }
 

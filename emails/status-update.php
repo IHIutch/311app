@@ -3,8 +3,7 @@
     use Mailgun\Mailgun;
 
     # Instantiate the client.
-    $key = env('MAILGUN');
-    $mgClient = new Mailgun($key);
+    $mgClient = new Mailgun($mgKey);
     $domain = "beta.buffalo311.org";
 
     $html = file_get_contents(__DIR__.'/templates/status-update.html');
@@ -27,7 +26,7 @@
     $result = $mgClient->sendMessage($domain, array(
         'from'    => 'Buffalo 311 <info@beta.buffalo311.org>',
         'to'      => $toEmail,
-        'subject' => 'Thank You for Your Submission',
+        'subject' => 'Your Ticket Has Been Updated',
         'html'    => $html
     ));
 ?>

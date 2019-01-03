@@ -7,11 +7,7 @@ if(isset($_SESSION['admin'])){
 }
 
 if(isset($_POST['status'])){
-    $status = mysqli_real_escape_string($connection, $_POST['status']);
-    $report_id = mysqli_real_escape_string($connection, $_GET['report_id']);
     updateStatus($report_id, $status);
-    header("Location: report.php?report_id=" . $report_id);
-    exit;
 }
 ?>
 
