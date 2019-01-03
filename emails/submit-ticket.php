@@ -3,7 +3,7 @@
     use Mailgun\Mailgun;
 
     # Instantiate the client.
-    $key = env('MAILGUN')
+    $key = env('MAILGUN');
     $mgClient = new Mailgun($key);
     $domain = "beta.buffalo311.org";
 
