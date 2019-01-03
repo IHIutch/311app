@@ -14,7 +14,7 @@
     $html = str_replace("#street_num#",$data['street_num'],$html);
     $html = str_replace("#street_name#",$data['street_name'],$html);
     $html = str_replace("#zip#",$data['zip'],$html);   
-    $link = 'https://beta.buffalo311.org/report.php?report_id='.$data['id'];
+    $link = $_SERVER['SERVER_NAME'].'/report.php?report_id='.$data['id'];
     $html = str_replace("#link#",$link,$html);
     $toEmail = '<'.$data['email'].'>';
 
