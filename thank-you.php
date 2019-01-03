@@ -1,4 +1,6 @@
 <?php 
+ob_start();
+
 if(empty($_POST['submit'])){ 
     header("Location: index.php"); 
     exit; 
