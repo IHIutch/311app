@@ -2,7 +2,7 @@
 
 if (!strpos($_SERVER['REQUEST_URI'],'report_id')) {
     $meta = array(
-        'title'    => 'Buffalo 311',
+        'title'    => 'Buffalo 311 (Beta)',
         'description'      => 'The data that the City of Buffalo collects in its day-to-day operations to make Buffalo a great place to live, work, and play are a valuable asset for all citizens. Data are the building blocks of information. Information applied is knowledge and knowledge is power.',
         'image' => 'http://$_SERVER[HTTP_HOST]/assets/images/meta.png',
         'url'    => "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",
