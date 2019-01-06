@@ -38,8 +38,8 @@
 
     <link rel="stylesheet" type="text/css" href="plugins/DataTables/datatables.min.css" />
     <script type="text/javascript" src="plugins/DataTables/datatables.min.js"></script>
-
-    <link rel="stylesheet" href="css/style.css">
+   
+    <link rel="stylesheet" href="assets/css/style.css">
 
 
     <?php 
@@ -49,6 +49,9 @@
     ?>
 
     <?php include_once './config.php'?>
+    
+    <?php include ROOT.'meta.php' ?>
+    
     <?php include ROOT.'autoload.php'?>
     <?php include ROOT.'functions.php'?>
 
