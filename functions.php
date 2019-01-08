@@ -181,9 +181,10 @@ function getPoints(){
         // Puts Stop Data into an array
     while ($row = mysqli_fetch_assoc($result)){
         
-    $street_name = str_ireplace(array("boulevard","avenue", "street", "road", "terrace", "highway"), 
-                               array("Blvd", "Ave", "St", "Rd", "Terr", "Hwy"),
-                               $row['street_name']);
+    $street_name = str_ireplace(
+        array("boulevard","avenue", "street", "road", "terrace", "highway"), 
+        array("Blvd", "Ave", "St", "Rd", "Terr", "Hwy"),
+        $row['street_name']);
         
         $lnglat = array($row['lng'], $row['lat']);
         
@@ -659,6 +660,27 @@ function updatePassword(){
     }else{
         return false;
     }            
+}
+
+function submitFeedback(){
+    if(isset($_POST['message'])){
+        global $connection;
+        
+        $email = mysqli_real_escape_string($connection, $_POST['email']);
+        $message = mysqli_real_escape_string($connection, $_POST['message']);
+            
+        $query = "INSERT INTO feedback(email, message) VALUES ('$email', '$message') ";
+        
+        $result = mysqli_query($connection, $query);
+        
+        
+        
+        if(!$result){
+            exit;
+        }else{
+            return true;
+        }
+    }
 }
 
 ?>
