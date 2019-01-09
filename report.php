@@ -35,7 +35,7 @@ if(isset($_POST['status'])){
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-9">
+                <div class="col-12 col-md-6">
                     <div class="mb-2">
                         <div class="d-inline-block mr-5">
                             <a class="border rounded d-inline-block p-1" href="/report.php?report_id=<?php echo $info['id']; ?>">Report ID:
@@ -44,14 +44,14 @@ if(isset($_POST['status'])){
                         <?php 
                             if(!$admin){ ?>
                         <div class="d-inline-block">
-                            <span><b>Status: </b></span><span class="badge badge-pill status-<?php echo preg_replace("/[\s_]/", "-", strtolower($info['status'])); ?>">
+                            <span><b>Status: </b></span><span class="badge badge-pill status-<?php echo preg_replace("/[\s_]/", "-" , strtolower($info['status'])); ?>">
                                 <?php echo $info['status']; ?></span>
                         </div>
                         <?php }else{ ?>
                         <span><b>Status: </b></span>
                         <div class="dropdown d-inline-block">
                             <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown">
-                                <span class="badge badge-pill status-<?php echo preg_replace("/[\s_]/", "-", strtolower($info['status']));?>">
+                                <span class="badge badge-pill status-<?php echo preg_replace("/[\s_]/", "-" , strtolower($info['status']));?>">
                                     <?php echo $info['status']; ?></span>
                             </button>
                             <div class="dropdown-menu">
@@ -99,6 +99,11 @@ if(isset($_POST['status'])){
                             ?>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-3 d-none d-md-block">
+                    <div class="btn btn-secondary" id="fbShare"><i class="fab fa-facebook"></i></div>
+                    <div class="btn btn-secondary" id="twShare"><i class="fab fa-twitter"></i></div>
+                    <div class="btn btn-secondary" onClick="copyLink()" id="copyLink"><i class="fas fa-link"></i></div>
                 </div>
             </div>
             <div class="row">
@@ -166,7 +171,7 @@ if(isset($_POST['status'])){
                     <p>Are you sure you want to update this ticket's status to:</p>
                 </div>
                 <div id="modalStatus" class="text-center">
-                        <span class="badge badge-pill p-3"></span>
+                    <span class="badge badge-pill p-3"></span>
                 </div>
             </div>
             <div class="modal-footer">
@@ -195,9 +200,38 @@ if(isset($_POST['status'])){
         var modal = $(this)
 
         $('#modalStatus').find('span').html(text)
-//        $('#modalStatus').find('span').attr('id', status)
+        //        $('#modalStatus').find('span').attr('id', status)
         $('#status').val(text)
     });
+    
+    $('#fbShare').click( function(){
+        window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location)+'&t='+document.title, '', 
+        'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=436,width=646');
+        return false;
+    });
+    $('#twShare').click( function(){
+        var shareText = 'Check out the 311 Report I submitted on Buffalo 311 (Beta)\n'
+        window.open('https://twitter.com/share?text='+shareText+'%0a&amp;url='+window.location, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=436,width=646'); 
+        return false;
+    });
+    
+    $('#copyLink').tooltip({
+        title: 'Link copied!',
+        animated: 'fade',
+        placement: 'top',
+        trigger: 'click',
+        delay: {hide: 100}
+    });
+    
+    function copyLink(){
+        var dummy = document.createElement('input'),
+        text = window.location.href;
+        document.body.appendChild(dummy);
+        dummy.value = text;
+        dummy.select();
+        document.execCommand('copy');
+        document.body.removeChild(dummy);
+    }
 
 </script>
 
