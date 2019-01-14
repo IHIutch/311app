@@ -74,7 +74,9 @@
                                         <td>
                                             <?php echo $d['subtype']?>
                                         </td>
-                                        <td><a href="report.php?report_id=<?php echo $d['id']?>">Link</a></td>
+                                        <td>
+                                            <a href="report.php?report_id=<?php echo $d['id']?>">Link</a>
+                                        </td>
                                     </tr>
                                     <?php } ?>
                                 </tbody>
@@ -115,7 +117,6 @@
 <script>
     $(document).ready(function() {
         $('#datatable').DataTable({
-            select: true,
             responsive: true
         });
     });

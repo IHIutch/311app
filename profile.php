@@ -25,9 +25,10 @@ $email = $_SESSION['email'];
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Submit Date</th>
-                            <th scope="col">Lat</th>
-                            <th scope="col">Lng</th>
-                            <th scope="col">Email</th>
+                            <th scope="col">Coords</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Zip Code</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Type</th>
                             <th scope="col">Subtype</th>
                             <th scope="col"></th>
@@ -41,16 +42,20 @@ $email = $_SESSION['email'];
                                 <?php echo $d['id']?>
                             </th>
                             <td>
-                                <?php echo date('m.d.y', strtotime($d['submission_date']))?>
+                                <?php echo date('m/d/y', strtotime($d['submission_date']))?>
                             </td>
                             <td>
-                                <?php echo $d['lat']?>
+                                <?php echo $d['lat'] . ', ' . $d['lng']?>
                             </td>
                             <td>
-                                <?php echo $d['lng']?>
+                            <?php echo $d['street_num'] . ' ' .  $d['street_name']?>
                             </td>
                             <td>
-                                <?php echo $d['email']?>
+                                <?php echo $d['zip'] ?>
+                            </td>
+                            <td>
+                                <span class="badge badge-pill status-<?php echo preg_replace("/[\s_]/", "-", strtolower($d['status']));?>">
+                                                <?php echo $d['status'] ?></span>
                             </td>
                             <td>
                                 <?php echo $d['type']?>
@@ -58,7 +63,9 @@ $email = $_SESSION['email'];
                             <td>
                                 <?php echo $d['subtype']?>
                             </td>
-                            <td><a href="report.php?report_id=<?php echo $d['id']?>">Link</a></td>
+                            <td>
+                                <a href="report.php?report_id=<?php echo $d['id']?>">Link</a>
+                            </td>
                         </tr>
                         <?php } ?>
                     </tbody>
@@ -71,7 +78,6 @@ $email = $_SESSION['email'];
 <script>
     $(document).ready(function() {
         $('#datatable').DataTable({
-            select: true,
             responsive: true
         });
     });

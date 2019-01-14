@@ -683,4 +683,55 @@ function submitFeedback(){
     }
 }
 
+//function uploadNewData(){
+//    global $connection;
+//    
+//    $query = "SELECT * FROM temp";
+//    
+//    $result = mysqli_query($connection, $query);
+//
+//    $status_arr = array('under review', 'assigned', 'scheduled', 'submitted');
+//    
+//    while($row = mysqli_fetch_assoc($result)){
+//            
+//        $open_date = DateTime::createFromFormat('n/j/y G:i',$row['open_date']);
+//        $open_date = $open_date->format('Y-m-d H:i');
+//        
+//        
+//        if(is_null($row['closed_date'])){
+//            $closed_date = '';
+//        }else{
+//            $closed_date = DateTime::createFromFormat('n/j/y G:i',$row['closed_date']);
+//            $closed_date = $closed_date->format('Y-m-d H:i');
+//        }
+//        
+////        print_r(DateTime::getLastErrors());
+//
+//        if($row['status'] == 'Open'){
+//            $status = $status_arr[array_rand($status_arr, 1)];
+//        }else{
+//            $status = 'completed';
+//        }
+//        
+//        $subject = $row['subject'];
+//        $reason = $row['reason'];
+//        $type = str_replace(" (Req_Serv)", "", $row['type']);
+//        $street_num = $row['street_num'];
+//        $street_name = ucwords(strtolower($row['street_name']));
+//        $zip = $row['zip'];
+//        $lat = $row['lat'];
+//        $lon = $row['lon'];
+//
+//        $query_1 = "INSERT INTO reports(submission_date, closed_date, subject, type, subtype, lat, lng, street_num, street_name, zip, status)";
+//        $query_1 .= " VALUES ('$open_date', '$closed_date', '$subject', '$reason', '$type', '$lat', '$lon', '$street_num', '$street_name', '$zip', '$status')";
+//        
+//        $result_1 = mysqli_query($connection, $query_1);
+//        
+//        if(!$result_1){
+//            die('Query failed.' . mysqli_error($connection));
+//        }
+//    } 
+
+}
+
 ?>
