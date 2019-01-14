@@ -731,7 +731,7 @@ function submitFeedback(){
 //            die('Query failed.' . mysqli_error($connection));
 //        }
 //    } 
-
-}
+//
+//}
 
 ?>
