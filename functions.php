@@ -538,12 +538,17 @@ function showUserData($email){
     if (!$result) {
       die('Invalid query: ' . mysqli_error($connection));
     }
+    
+    if($result->num_rows > 0){
 
-    // Puts Stop Data into an array
-    while ($row = mysqli_fetch_assoc($result)){       
-        $data[] = $row;
-    };
-    return $data;
+        while ($row = mysqli_fetch_assoc($result)){       
+            $data[] = $row;
+        };
+
+        return $data;
+    }else{
+        exit;
+    }
 }
 
 function uploadInfo($create_row,$upload_image,$last_id){

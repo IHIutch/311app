@@ -36,7 +36,7 @@ $email = $_SESSION['email'];
                     </thead>
                     <tbody>
                         <?php $data = showUserData($email); 
-                                    foreach($data as $d){ ?>
+                        foreach($data as $d){ ?>
                         <tr>
                             <th scope="row">
                                 <?php echo $d['id']?>
