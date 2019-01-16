@@ -101,6 +101,7 @@ if(isset($_POST['status'])){
                     </div>
                 </div>
                 <div class="col-md-3 d-none d-md-block">
+                    <div class="text-uppercase small mb-2"><b>Share</b></div>
                     <div class="btn btn-secondary" id="fbShare"><i class="fab fa-facebook"></i></div>
                     <div class="btn btn-secondary" id="twShare"><i class="fab fa-twitter"></i></div>
                     <div class="btn btn-secondary" onClick="copyLink()" id="copyLink"><i class="fas fa-link"></i></div>
@@ -203,29 +204,31 @@ if(isset($_POST['status'])){
         //        $('#modalStatus').find('span').attr('id', status)
         $('#status').val(text)
     });
-    
-    $('#fbShare').click( function(){
-        window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location)+'&t='+document.title, '', 
-        'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=436,width=646');
+
+    $('#fbShare').click(function() {
+        window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location) + '&t=' + document.title, '',
+            'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=436,width=646');
         return false;
     });
-    $('#twShare').click( function(){
+    $('#twShare').click(function() {
         var shareText = 'Check out the 311 Report I submitted on Buffalo 311 (Beta)\n'
-        window.open('https://twitter.com/share?text='+shareText+'%0a&amp;url='+window.location, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=436,width=646'); 
+        window.open('https://twitter.com/share?text=' + shareText + '%0a&amp;url=' + window.location, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=436,width=646');
         return false;
     });
-    
+
     $('#copyLink').tooltip({
         title: 'Link copied!',
         animated: 'fade',
         placement: 'top',
         trigger: 'click',
-        delay: {hide: 100}
+        delay: {
+            hide: 100
+        }
     });
-    
-    function copyLink(){
+
+    function copyLink() {
         var dummy = document.createElement('input'),
-        text = window.location.href;
+            text = window.location.href;
         document.body.appendChild(dummy);
         dummy.value = text;
         dummy.select();
@@ -253,7 +256,8 @@ if(isset($_POST['status'])){
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
         id: 'mapbox.streets',
-        accessToken: '<?php echo env('MAPBOX'); ?>'
+        accessToken: '<?php echo env('
+        MAPBOX '); ?>'
     }).addTo(map);
 
     var point = <?php echo json_encode($pointData['features']); ?>;

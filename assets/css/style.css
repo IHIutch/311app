@@ -156,3 +156,8 @@ body {
 .navbar-dark .navbar-nav .nav-link{
     color: #fff;
 }
+
+.navbar-brand img{
+    height: 40px;
+    width: auto;
+}
