@@ -5,6 +5,7 @@
         <div class="col-12 col-md-8 offset-md-2">
             <div class="border-bottom pb-2 mb-3">
                 <h1 class="h1">Create a Report</h1>
+                <span>Go ahead and fill one out, see what happens!</span>
             </div>
         </div>
     </div>
