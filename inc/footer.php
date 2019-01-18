@@ -9,12 +9,12 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="border-bottom mb-3">
-                    <p class="text-center display-2 mb-0">&#x26A0;</p>
-                    <h2 class="text-center display-4">Warning!</h2>
+                    <p class="text-center display-2 mb-0">👋</p>
+                    <h2 class="text-center display-4">Welcome!</h2>
                 </div>
-                <p>This site is not the official 311 service of Buffalo. It is a small passion project and beta test of a more usable and transparent system. If you have a legitimate 311 issue, please report it at the <a href="https://www.buffalony.gov/463/311-Call-Resolution-Center">311 Call &amp; Resolution Center</a>.</p>
-                <p>This site is a work in progress and will continue to change. You may experience bugs.</p>
-                <p class="mb-0 small text-muted">Clicking the button below will store a teeny, tiny little cookie so you don't have to see this message ever again.</p>
+                <p>This site is a small passion project and beta test of a more usable and transparent 311 system. Go ahead and try fill out a report, see what you think, and leave some feedback! </p>
+                <p>If you have a legitimate 311 issue, please report it at the <a href="https://www.buffalony.gov/463/311-Call-Resolution-Center">311 Call &amp; Resolution Center</a>.</p>
+                <p class="mb-0 small text-muted text-center">This site is a work in progress and will continue to change. You may experience bugs.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" id="warningClose" class="btn btn-primary m-auto" data-dismiss="modal">I understand</button>
