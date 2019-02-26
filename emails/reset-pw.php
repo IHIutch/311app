@@ -8,7 +8,7 @@
 
     $html = file_get_contents(__DIR__.'/templates/reset-pw.html');
 
-    $link = $_SERVER['SERVER_NAME'].'/reset.php?code='.$token;
+    $link = 'https://'.$_SERVER['SERVER_NAME'].'/reset.php?code='.$token;
     $html = str_replace("#link#",$link,$html);
     $toEmail = '<'.$email.'>';
 
