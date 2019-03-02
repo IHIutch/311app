@@ -2,11 +2,9 @@
 
 use Mailgun\Mailgun;
 
-$mailgun = getenv('MAILGUN');
-
 function mail_submit($to, $details){
     
-    $mg = Mailgun::create($mailgun); // For US servers
+    $mg = Mailgun::create(getenv('MAILGUN')); // For US servers
     
     $html = file_get_contents(__DIR__.'/../templates/emails/submit-ticket.html');
     $html = str_replace('#id#',$details['id'],$html);
