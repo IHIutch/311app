@@ -1,4 +1,3 @@
-config.php
-lib
-node_modules
-env.php
+/logs/*
+!/logs/README.md
+.env
