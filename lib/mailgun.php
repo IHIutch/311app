@@ -2,7 +2,7 @@
 
 use Mailgun\Mailgun;
 
-$mailgun = getenv('MAILGUN'));
+$mailgun = getenv('MAILGUN');
 
 function mail_submit($to, $details){
     
