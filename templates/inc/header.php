@@ -48,10 +48,10 @@
                         <a class="nav-link" href="/">Create a Report</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="reports.php">Reports</a>
+                        <a class="nav-link" href="/reports">Reports</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="profile.php">Your Account</a>
+                        <a class="nav-link" href="/profile">Your Account</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="logout.php">Log Out</a>
@@ -70,13 +70,13 @@
                         <a class="nav-link" href="/">Create a Report</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="reports.php">Reports</a>
+                        <a class="nav-link" href="/reports">Reports</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.php">Log In</a>
+                        <a class="nav-link" href="/login">Log In</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary" href="register.php">Register</a>
+                        <a class="btn btn-primary" href="register">Register</a>
                     </li>
                 </ul>
             </div>
